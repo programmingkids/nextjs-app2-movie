@@ -59,7 +59,7 @@ export async function getMovieByVideoId(videoId: string) {
   }
 
   // APIに対する通信処理
-  const url = `${APIURL}/video?key=${APIKEY}&part=id,snippet&id=${videoId}`;
+  const url = `${APIURL}/videos?key=${APIKEY}&part=id,snippet&id=${videoId}`;
   console.log(url);
 
   const data = await fetch(url);

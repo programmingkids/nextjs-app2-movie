@@ -88,6 +88,44 @@ export type YoutubeVideoItem = {
   };
 };
 
+export type YoutubeVideoById = {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      medium: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      high: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      standard: {
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+    channelTitle: string;
+    tags: string[];
+    categoryId: string;
+    liveBroadcastContent: string;
+  };
+};
+
 export type YoutubePlayerVideo = { title: string; videoId: string };
 export type YoutubePlayerVideoList = YoutubePlayerVideo[];
 
