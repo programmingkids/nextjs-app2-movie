@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
+import ReactPlayer from "react-player/youtube";
 import { FaPlay } from "react-icons/fa6";
 import { FaPause } from "react-icons/fa6";
 import { FaAnglesRight } from "react-icons/fa6";
@@ -7,9 +8,6 @@ import { FaAnglesLeft } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
 import { type YoutubePlayerProps } from "@/types/index";
 
-let player: { getCurrentTime: () => any };
-let loadYtIframeAPI: Promise<any>;
-
 export function YoutubePlayer({
   videoList,
   currentPlay,
@@ -17,117 +15,78 @@ export function YoutubePlayer({
 }: YoutubePlayerProps) {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [playLabel, setPlayLabel] = useState(<FaPlay />);
+  const [playing, setPlaying] = useState(false);
+  const [hasWindow, setHasWindow] = useState(false);
 
   useEffect(() => {
-    loadYtPlayer();
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
   }, []);
 
-  useEffect(() => {
-    if (player) {
-      player.currentPlay = currentPlay;
-      updatePlayer(currentPlay);
-    }
-  }, [currentPlay]);
-
-  const loadYtPlayer = () => {
-    if (!loadYtIframeAPI) {
-      loadYtIframeAPI = new Promise((resolve) => {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-        (window as any).onYouTubeIframeAPIReady = () =>
-          resolve((window as any).YT);
-      });
-    }
-
-    if (videoRef?.current) {
-      loadYtIframeAPI.then((YT: any) => {
-        player = new YT.Player(videoRef.current, {
-          videoId: videoList[currentPlay].videoId,
-          events: {
-            onReady: onPlayerReady,
-            onStateChange: onPlayerStateChange,
-          },
-        });
-        player.currentPlay = currentPlay;
-      });
-    }
-  };
-
-  const onPlayerReady = (event: any) => {
-    // YoutubePlayerVideo
-  };
-
-  const onPlayerStateChange = (newState: { data: number }) => {
-    if (newState.data == 1) {
-      // Video Playing
-      setPlayLabel(<FaPause />);
-    } else if (newState.data == 0) {
-      // Video Finished
-      const newIndex = (player.currentPlay + 1) % videoList.length;
-      updateCurrentPlay(newIndex);
-    } else if (newState.data == 2) {
-      // Video Paused
-      setPlayLabel(<FaPlay />);
-    }
-  };
-
   function handleClickPlay() {
-    if (!player) {
-      return;
-    }
-    if (player.getPlayerState() === 1) {
-      player.pauseVideo();
-      const label = <FaPlay />;
-      setPlayLabel(label);
-    } else {
-      player.playVideo();
-      const label = <FaPause />;
-      setPlayLabel(label);
-    }
+    setPlaying((p) => !p);
   }
 
   function handleClickSeekTo(sec: number) {
-    if (!player) {
-      return;
+    const player = videoRef.current;
+    if (player) {
+      const currentSec = player.getCurrentTime() ?? 0;
+      player.seekTo(currentSec + sec);
     }
-    const currentTime = player.getCurrentTime();
-    player.seekTo(currentTime + sec);
   }
 
   function handledClickPrev() {
+    playPrev();
+  }
+
+  function handledClickNext() {
+    playNext();
+  }
+
+  function playerStart() {
+    setPlaying(true);
+  }
+
+  function playerPlay() {
+    setPlayLabel(<FaPause />);
+  }
+
+  function playerPause() {
+    setPlayLabel(<FaPlay />);
+  }
+
+  function playPrev() {
     const newIndex =
       currentPlay - 1 < 0
         ? videoList.length - 1
         : (currentPlay - 1) % videoList.length;
-    updateCurrentPlay(newIndex);
-  }
-
-  function handledClickNext() {
-    const newIndex = (currentPlay + 1) % videoList.length;
-    updateCurrentPlay(newIndex);
-  }
-
-  function updateCurrentPlay(newIndex: number) {
     setCurrentPlay(newIndex);
   }
 
-  function updatePlayer(newIndex: number) {
-    player.loadVideoById(videoList[newIndex].videoId, 0);
+  function playNext() {
+    const newIndex = (currentPlay + 1) % videoList.length;
+    setCurrentPlay(newIndex);
   }
 
   return (
     <div className="aspect-video">
-      <div
-        id="player"
-        ref={videoRef}
-        className="w-full h-full rounded-xl"
-      ></div>
-      <div className="py-2 text-4xl lg:text-2xl font-bold">
-        {videoList[currentPlay].title}
-      </div>
-      <div className="p-5">
+      {hasWindow && (
+        <ReactPlayer
+          ref={videoRef}
+          url={`https://www.youtube.com/watch?v=${videoList[currentPlay].videoId}`}
+          playing={playing}
+          controls={true}
+          width="100%"
+          height="100%"
+          className="react-player"
+          onStart={playerStart}
+          onPlay={playerPlay}
+          onPause={playerPause}
+          onEnded={playNext}
+        />
+      )}
+      <div className="mt-6 mb-4">
         <div className="flex justify-center gap-0">
           <button
             type="button"
@@ -185,6 +144,9 @@ export function YoutubePlayer({
             <FaAnglesRight className="inline ml-1" />
           </button>
         </div>
+      </div>
+      <div className="mb-5 text-4xl lg:text-2xl font-bold">
+        {videoList[currentPlay].title}
       </div>
     </div>
   );

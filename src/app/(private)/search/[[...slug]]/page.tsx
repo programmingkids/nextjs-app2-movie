@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 export default async function Page(props: SearchPageProps) {
   // /seach/{keyword}
   const params = await props.params;
-  const [keyword = ""] = params.slug || [];
+  const [q = ""] = params.slug || [];
+  const keyword = decodeURIComponent(q);
 
   // APIで検索
   const { items, totalResults } = await getMovieByKeyword(keyword);

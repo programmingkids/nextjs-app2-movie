@@ -1,3 +1,5 @@
+//export const dynamic = "force-dynamic";
+
 import { type Metadata } from "next";
 import { type SearchPageProps } from "@/types/page";
 import {
@@ -11,53 +13,34 @@ export const metadata: Metadata = {
   title: "Watch",
 };
 
-/*
-const videoList: YoutubePlayerVideoList = [
-  {
-    title:
-      "hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, hoge0, ",
-    videoId: "dFf4AgBNR1E",
-  },
-  {
-    title:
-      "hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, hoge1, ",
-    videoId: "nwHaeAV7WQU",
-  },
-  {
-    title: "hoge2",
-    videoId: "tzdhDr4t84I",
-  },
-  {
-    title: "hoge3",
-    videoId: "XHdcW2axwMk",
-  },
-  {
-    title: "hoge4",
-    videoId: "WdhMjzfg6-k",
-  },
-];
-*/
-
 export default async function Page(props: SearchPageProps) {
   // /watch/{videoId}
-
   const params = await props.params;
   const [videoId = ""] = params.slug || [];
 
   // VideoIdでAPI検索
   const { items } = await getMovieByVideoId(videoId);
-  // videoIdとtitleを抽出
+  //console.dir(items, { depth: null });
+
+  // videoIdとkeywordを抽出
   const mainItem =
     items.length > 0
-      ? { videoId: items[0]["id"], title: items[0]["snippet"]["title"] }
-      : { videoId: "", title: "" };
+      ? {
+          videoId: items[0]["id"],
+          keyword:
+            items[0]["snippet"]["tags"]?.length > 0
+              ? items[0]["snippet"]["tags"].join("%7C")
+              : items[0]["snippet"]["title"],
+        }
+      : { videoId: "", keyword: "" };
 
-  // titleでキーワード検索
+  // mainItemのkeywordで関連動画をキーワードAPI検索
   const { items: relatedItems } = await getMovieByKeyword(
-    mainItem["title"],
+    mainItem["keyword"].substring(0, 30),
     10,
   );
 
+  // メイン動画と関連動画を結合
   const videoList: YoutubePlayerVideoList = [
     ...items.map((v: YoutubeVideoById) => ({
       videoId: v.id,
@@ -70,6 +53,7 @@ export default async function Page(props: SearchPageProps) {
       }))
       .filter((v: string) => v.videoId !== mainItem["videoId"]),
   ];
+  //console.log(videoList);
 
   return (
     <>

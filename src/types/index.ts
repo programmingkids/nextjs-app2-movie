@@ -82,6 +82,7 @@ export type YoutubeVideoItem = {
         height: number;
       };
     };
+    tags: string[];
     channelTitle: string;
     liveBroadcastContent: string;
     publishTime: string;

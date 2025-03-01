@@ -25,7 +25,7 @@ export async function getMovieByKeyword(
 
   // APIに対する通信処理
   const url = `${APIURL}/search?key=${APIKEY}&type=video&part=snippet&q=${keyword}&maxResults=${limit}&pageToken=${pageToken}`;
-  console.log(url);
+  //console.log(url);
 
   const data = await fetch(url);
   const {
@@ -60,7 +60,7 @@ export async function getMovieByVideoId(videoId: string) {
 
   // APIに対する通信処理
   const url = `${APIURL}/videos?key=${APIKEY}&part=id,snippet&id=${videoId}`;
-  console.log(url);
+  //console.log(url);
 
   const data = await fetch(url);
   const { items } = await data.json();
