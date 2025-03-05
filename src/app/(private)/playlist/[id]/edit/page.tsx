@@ -1,39 +1,44 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { HiMiniAcademicCap } from "react-icons/hi2";
-import { getAuthorById } from "@/db/author";
-import { AuthorEditForm } from "@/components/author/edtForm";
-
-type Props = {
-  params: {
-    id: string;
-  };
-};
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { type PlaylisteEditPageProps } from "@/types/page";
+import { getAuth } from "@/hooks/auth/server";
+import { getPlaylistById } from "@/db/playlist";
+import { PlaylistEditForm } from "@/components/playlist/edtForm";
 
 export const metadata: Metadata = {
-  title: "Author Edit",
+  title: "Playlist Edit",
 };
 
-export default async function Page({ params: { id } }: Props) {
+export default async function Page(props: PlaylisteEditPageProps) {
+  // /playlist/{id}/edit
+  const params = await props.params;
+  const id = params.id;
   // 型変換
-  const authorId = parseInt(id as string, 10);
+  const playlistId = parseInt(id as string, 10);
+
+  const {
+    user: { id: userId },
+  } = await getAuth();
+
   // 編集対象のデータを取得
-  const result = await getAuthorById(authorId);
+  const result = await getPlaylistById(playlistId, userId);
   if (!result.success) {
     // 存在しない場合、NotFoundにする
     notFound();
   }
+
   return (
-    <div className="main">
-      <h1 className="p-4 bg-emerald-500 text-white text-2xl">
-        <HiMiniAcademicCap className="inline align-bottom mr-2 text-2xl" />
-        Author Edit
+    <>
+      <h1 className="mb-4 p-4 text-center bg-orange-500 text-white text-lg">
+        <MdOutlineFeaturedPlayList className="inline align-bottom mr-2 text-2xl" />
+        Playlist Edit
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 px-6 text-start">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 col-start-1 md:col-start-2 lg:col-start-2 col-span-1 md:col-span-3 lg:col-span-1">
-          <AuthorEditForm {...{ defaultValues: result.data }} />
+          <PlaylistEditForm {...{ defaultValues: result.data }} />
         </div>
       </div>
-    </div>
+    </>
   );
 }

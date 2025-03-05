@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import { HiMiniAcademicCap } from "react-icons/hi2";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PlaylistCreateForm } from "@/components/playlist/createForm";
 import { getAuth } from "@/hooks/auth/server";
 
@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <>
       <h1 className="mb-4 p-4 text-center bg-orange-500 text-white text-lg">
-        <HiMiniAcademicCap className="inline align-bottom mr-2 text-2xl" />
+        <MdOutlineFeaturedPlayList className="inline align-bottom mr-2 text-2xl" />
         Playlist Create
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 px-6 text-start">

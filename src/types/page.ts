@@ -27,3 +27,9 @@ export type MovieListProps = {
 export type MovieItemProps = {
   item: YoutubeVideoItem;
 };
+
+export type PlaylisteEditPageProps = {
+  params: {
+    id: string;
+  };
+};

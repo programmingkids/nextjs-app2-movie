@@ -4,94 +4,87 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editAuthorAction } from "@/actions/author";
+import { PlaylistSchema, type Playlist } from "@/db/prisma/generated/zod/index";
+import { type PlaylistEditFormProps } from "@/types/index";
+import { TextInput } from "@/components/ui/form";
+import { LoadingButton } from "@/components/ui/button";
+import { editPlaylistAction } from "@/actions/playlist";
 import { SuccessModal } from "@/components/ui/modal";
 import { ErrorModal } from "@/components/ui/errorModal";
-import { type Author, AuthorSchema } from "@/prisma-zod/index";
 
-type Props = {
-  defaultValues: Author;
-};
-
-export const AuthorEditForm = ({ defaultValues }: Props) => {
-  const [open, setOpen] = useState(false);
-  const [data, setData] = useState<Author>();
+export const PlaylistEditForm = ({ defaultValues }: PlaylistEditFormProps) => {
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+  const [showErrorModal, setErrorShowModal] = useState(false);
 
   // Formの入力パーツの初期化
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    setError,
-    clearErrors,
-  } = useForm<Author>({
-    resolver: zodResolver(AuthorSchema),
-    defaultValues,
-  });
+  const { register, handleSubmit, formState, setError, clearErrors } =
+    useForm<Playlist>({
+      resolver: zodResolver(PlaylistSchema),
+      defaultValues,
+    });
+  const { errors, isDirty, isValid, isSubmitting } = formState;
 
   // onSubmitイベントのハンドラー
-  const onSubmit: SubmitHandler<Author> = async (data: Author) => {
+  const onSubmit: SubmitHandler<Playlist> = async (data: Playlist) => {
     // 送信時にエラー表示を解除
     clearErrors();
     // サーバアクションを起動
-    const result = await editAuthorAction(data);
+    const result = await editPlaylistAction(data);
     // サーバー側でエラー
-    if (!result.success) {
+    if (result.success) {
+      setShowModal(true);
+    } else {
       Object.entries(result.error!).map(([k, v]) => {
         setError(`root.${k}`, { message: v[0] });
       });
-      return;
+      if (errors.root?.server_error?.message) {
+        setErrorShowModal(true);
+      }
     }
-    // 更新成功の場合、モーダルを表示する
-    setData(result.data);
-    setOpen(true);
   };
 
   const onSuccess = () => {
-    router.push("/author");
+    router.push("/playlist");
+  };
+
+  const onError = () => {
+    setErrorShowModal(false);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
-          <label className="block mb-2" htmlFor="name">
-            NAME
-          </label>
-          <input
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:shadow-outline focus:border-blue-500"
-            {...register("name")}
+      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-2 mb-6">
+          <TextInput
+            label="名前"
+            name="name"
+            placeholder="input name"
+            type="text"
+            error={errors.name?.message || errors.root?.name?.message}
+            register={register}
+            formState={formState}
           />
-          <div className="mt-1 mb-4 text-red-500 font-bold">
-            {errors.name?.message}
-            {errors.root?.name?.message}
-          </div>
         </div>
-        <div className="mb-4">
-          <button
-            type="submit"
-            className="w-full p-3 rounded bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300 disabled:cursor-not-allowed"
-            disabled={isSubmitting}
-          >
-            登録
-          </button>
-        </div>
+        <LoadingButton
+          label="更新"
+          type="submit"
+          full={true}
+          color="blue"
+          isProcessing={isSubmitting}
+          disabled={!isDirty || !isValid}
+        />
       </form>
-      <SuccessModal
-        open={open}
-        onClose={() => setOpen(false)}
-        onSuccess={onSuccess}
-        data={data}
-        title="更新完了"
-        successText="一覧へ移動"
-      />
-      {errors.root?.server_error?.message && (
+      {showModal && (
+        <SuccessModal
+          mainText="プレイリストを更新しました"
+          onClose={onSuccess}
+        />
+      )}
+      {showErrorModal && (
         <ErrorModal
-          onSuccess={onSuccess}
-          message={errors.root?.server_error?.message}
-          title="エラー"
-          successText="一覧へ移動"
+          mainText={errors.root?.server_error?.message ?? ""}
+          onClose={onError}
         />
       )}
     </>

@@ -1,3 +1,5 @@
+import { type Playlist } from "@/db/prisma/generated/zod/index";
+
 export type SignInActionReturnType =
   | undefined
   | {
@@ -158,4 +160,8 @@ export type PlaylistCreateFormProps = {
   defaultValues: {
     userId: string;
   };
+};
+
+export type PlaylistEditFormProps = {
+  defaultValues: Playlist;
 };

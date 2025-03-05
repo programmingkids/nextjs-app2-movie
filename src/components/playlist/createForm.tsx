@@ -43,7 +43,9 @@ export function PlaylistCreateForm({ defaultValues }: PlaylistCreateFormProps) {
       Object.entries(result.error!).map(([k, v]) => {
         setError(`root.${k}`, { message: v[0] });
       });
-      setErrorShowModal(true);
+      if (errors.root?.server_error?.message) {
+        setErrorShowModal(true);
+      }
     }
   };
 
@@ -85,7 +87,10 @@ export function PlaylistCreateForm({ defaultValues }: PlaylistCreateFormProps) {
         />
       )}
       {showErrorModal && (
-        <ErrorModal mainText="エラーが発生しました" onClose={onError} />
+        <ErrorModal
+          mainText={errors.root?.server_error?.message ?? ""}
+          onClose={onError}
+        />
       )}
     </>
   );

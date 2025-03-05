@@ -1,8 +1,9 @@
 import { type Metadata } from "next";
 import Link from "next/link";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { MdOutlineAdd } from "react-icons/md";
-import { HiMiniAcademicCap } from "react-icons/hi2";
-import { getPlaylists } from "@/db/playlist";
+import { getAuth } from "@/hooks/auth/server";
+import { getPlaylistByUserId } from "@/db/playlist";
 import { Table } from "@/components/playlist/table";
 
 export const metadata: Metadata = {
@@ -10,13 +11,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  // 一覧データを取得
-  const list = await getPlaylists();
+  const {
+    user: { id: userId },
+  } = await getAuth();
+
+  // ユーザIDで一覧データを取得
+  const list = await getPlaylistByUserId(userId);
 
   return (
     <>
       <h1 className="mb-4 p-4 text-center bg-orange-500 text-white text-lg">
-        <HiMiniAcademicCap className="inline align-bottom mr-2 text-2xl" />
+        <MdOutlineFeaturedPlayList className="inline align-bottom mr-2 text-2xl" />
         Playlist
       </h1>
       <div className="py-4 px-6">

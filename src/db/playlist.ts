@@ -14,6 +14,49 @@ export async function getPlaylists() {
   return result;
 }
 
+export async function getPlaylistByUserId(userId: string) {
+  // ユーザIDで検索
+  const result = await prisma.playlist.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+  return result;
+}
+
+type PlaylistReturnType =
+  | {
+      success: true;
+      data: Playlist;
+    }
+  | {
+      success: false;
+    };
+
+export async function getPlaylistById(
+  id: number,
+  userId: string,
+): Promise<PlaylistReturnType> {
+  // 1件を取得
+  const result = await prisma.playlist.findFirst({
+    where: {
+      id,
+      userId,
+    },
+  });
+  return result !== null
+    ? {
+        success: true,
+        data: result,
+      }
+    : {
+        success: false,
+      };
+}
+
 export async function createPlaylist(data: PlaylistOptionalDefaults) {
   // 新規登録
   try {
@@ -31,32 +74,6 @@ export async function createPlaylist(data: PlaylistOptionalDefaults) {
       error: { server_error: ["Database Error"] },
     };
   }
-}
-
-type PlaylistReturnType =
-  | {
-      success: true;
-      data: Playlist;
-    }
-  | {
-      success: false;
-    };
-
-export async function getPlaylistById(id: number): Promise<PlaylistReturnType> {
-  // 1件を取得
-  const result = await prisma.playlist.findUnique({
-    where: {
-      id,
-    },
-  });
-  return result !== null
-    ? {
-        success: true,
-        data: result,
-      }
-    : {
-        success: false,
-      };
 }
 
 export async function updatePlaylist(data: Playlist) {

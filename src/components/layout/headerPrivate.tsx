@@ -19,6 +19,7 @@ import { SearchBox } from "@/components/common/searchBox";
 const avatarLinks = [
   { title: "ダッシュボード", href: "/dashboard" },
   { title: "設定", href: "/settings" },
+  { title: "プレイリスト", href: "/playlist" },
 ];
 
 export function Header() {
