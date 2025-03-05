@@ -48,6 +48,12 @@ export type SuccessModalProps = {
   onClose: () => void;
 };
 
+export type ErrorModalProps = {
+  mainText: string;
+  okButtonText?: string;
+  onClose: () => void;
+};
+
 export type SearchBoxProps = {
   keyword?: string;
 };
@@ -146,4 +152,10 @@ export type YoutubePlayerRelatedVideoProps = {
   current: boolean;
   index: number;
   setCurrentPlay: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export type PlaylistCreateFormProps = {
+  defaultValues: {
+    userId: string;
+  };
 };

@@ -1,12 +1,12 @@
 import { IoMdClose } from "react-icons/io";
-import { FaCircleInfo } from "react-icons/fa6";
-import { SuccessModalProps } from "@/types/index";
+import { FaTriangleExclamation } from "react-icons/fa6";
+import { ErrorModalProps } from "@/types/index";
 
-export function SuccessModal({
+export function ErrorModal({
   mainText,
   onClose,
   okButtonText = "OK",
-}: SuccessModalProps) {
+}: ErrorModalProps) {
   return (
     <div
       id="popup-modal"
@@ -31,7 +31,7 @@ export function SuccessModal({
             <span className="sr-only">Close modal</span>
           </button>
           <div className="p-4 md:p-5 text-center">
-            <FaCircleInfo className="mx-auto mb-4 text-gray-400 w-12 h-12" />
+            <FaTriangleExclamation className="mx-auto mb-4 text-red-500 w-12 h-12" />
             <h3 className="mb-5 text-lg font-normal text-center text-gray-500">
               {mainText}
             </h3>
@@ -39,7 +39,7 @@ export function SuccessModal({
               data-modal-hide="popup-modal"
               type="button"
               onClick={onClose}
-              className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-10 py-2.5 text-center"
+              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-10 py-2.5 text-center"
             >
               {okButtonText}
             </button>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <div className="">
+    <>
       <h1 className="mb-4 p-4 text-center text-lg bg-blue-500 text-white">
         設定
       </h1>
@@ -20,6 +20,6 @@ export default async function Page() {
           <ProfileUpdateForm />
         </div>
       </div>
-    </div>
+    </>
   );
 }

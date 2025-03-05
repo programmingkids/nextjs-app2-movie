@@ -6,10 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:migrate:dev": "npx dotenv -e .env.local -- npx prisma migrate dev --name init",
+    "prisma:db:seed": "npx dotenv -e .env.local -- npx prisma db seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.0.0",
+    "@prisma/client": "6.3.1",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.48.1",
     "entities": "^6.0.0",
@@ -26,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",
@@ -34,5 +38,9 @@
     "tsx": "^4.19.2",
     "typescript": "^5",
     "zod-prisma-types": "^3.2.4"
+  },
+  "prisma": {
+    "schema": "src/db/prisma/schema.prisma",
+    "seed": "tsx src/db/seeds/seed.ts"
   }
 }
