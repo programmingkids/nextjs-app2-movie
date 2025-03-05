@@ -34,8 +34,6 @@ generator zod {
 }
 
 model User {
-  //id Int @id @default(autoincrement())
-  //authUserId String @unique
   id String @id @default(uuid())
   email String  @unique
   playlist Playlist[]
