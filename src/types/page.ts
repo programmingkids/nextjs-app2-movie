@@ -33,3 +33,22 @@ export type PlaylisteEditPageProps = {
     id: string;
   };
 };
+
+export type VideoListPageProps = {
+  params: {
+    playlistId: string;
+  };
+};
+
+export type VideoCreatePageProps = {
+  params: {
+    playlistId: string;
+  };
+};
+
+export type VideoEditPageProps = {
+  params: {
+    playlistId: string;
+    id: string;
+  };
+};

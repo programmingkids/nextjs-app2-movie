@@ -4,33 +4,33 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlaylistSchema, type Playlist } from "@/db/prisma/generated/zod/index";
-import { type PlaylistEditFormProps } from "@/types/index";
+import { VideoSchema, type Video } from "@/db/prisma/generated/zod/index";
+import { type VideoEditFormProps } from "@/types/index";
 import { TextInput } from "@/components/ui/form";
 import { LoadingButton } from "@/components/ui/button";
-import { editPlaylistAction } from "@/actions/playlist";
+import { editVideoAction } from "@/actions/video";
 import { SuccessModal } from "@/components/ui/modal";
 import { ErrorModal } from "@/components/ui/errorModal";
 
-export function PlaylistEditForm({ defaultValues }: PlaylistEditFormProps) {
+export function VideoEditForm({ defaultValues }: VideoEditFormProps) {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showErrorModal, setErrorShowModal] = useState(false);
 
   // Formの入力パーツの初期化
   const { register, handleSubmit, formState, setError, clearErrors } =
-    useForm<Playlist>({
-      resolver: zodResolver(PlaylistSchema),
+    useForm<Video>({
+      resolver: zodResolver(VideoSchema),
       defaultValues,
     });
   const { errors, isDirty, isValid, isSubmitting } = formState;
 
   // onSubmitイベントのハンドラー
-  const onSubmit: SubmitHandler<Playlist> = async (data: Playlist) => {
+  const onSubmit: SubmitHandler<Video> = async (data: Video) => {
     // 送信時にエラー表示を解除
     clearErrors();
     // サーバアクションを起動
-    const result = await editPlaylistAction(data);
+    const result = await editVideoAction(data);
     // サーバー側でエラー
     if (result.success) {
       setShowModal(true);
@@ -45,7 +45,7 @@ export function PlaylistEditForm({ defaultValues }: PlaylistEditFormProps) {
   };
 
   const onSuccess = () => {
-    router.push("/playlist");
+    router.push(`/video/${defaultValues.playlistId}`);
   };
 
   const onError = () => {
@@ -57,11 +57,22 @@ export function PlaylistEditForm({ defaultValues }: PlaylistEditFormProps) {
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2 mb-6">
           <TextInput
-            label="名前"
-            name="name"
-            placeholder="input name"
+            label="タイトル"
+            name="title"
+            placeholder="input title"
             type="text"
-            error={errors.name?.message || errors.root?.name?.message}
+            error={errors.title?.message || errors.root?.title?.message}
+            register={register}
+            formState={formState}
+          />
+        </div>
+        <div className="mt-2 mb-6">
+          <TextInput
+            label="ビデオID"
+            name="videoId"
+            placeholder="input videoId"
+            type="text"
+            error={errors.videoId?.message || errors.root?.videoId?.message}
             register={register}
             formState={formState}
           />
@@ -76,10 +87,7 @@ export function PlaylistEditForm({ defaultValues }: PlaylistEditFormProps) {
         />
       </form>
       {showModal && (
-        <SuccessModal
-          mainText="プレイリストを更新しました"
-          onClose={onSuccess}
-        />
+        <SuccessModal mainText="ビデオを更新しました" onClose={onSuccess} />
       )}
       {showErrorModal && (
         <ErrorModal

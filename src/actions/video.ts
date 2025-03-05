@@ -1,18 +1,18 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createPlaylist, updatePlaylist } from "@/db/playlist";
+import { createVideo, updateVideo } from "@/db/video";
 import {
-  type Playlist,
-  type PlaylistOptionalDefaults,
-  PlaylistSchema,
-  PlaylistOptionalDefaultsSchema,
+  type Video,
+  type VideoOptionalDefaults,
+  VideoSchema,
+  VideoOptionalDefaultsSchema,
 } from "@/db/prisma/generated/zod/index";
 
 // 新規登録処理を行うサーバーアクション関数
-export async function createPlaylistAction(data: PlaylistOptionalDefaults) {
+export async function createVideoAction(data: VideoOptionalDefaults) {
   // Zodによるバリデーションを実行する
-  const result = PlaylistOptionalDefaultsSchema.safeParse(data);
+  const result = VideoOptionalDefaultsSchema.safeParse(data);
 
   // バリデーション失敗の場合、errorを返す
   if (!result.success) {
@@ -23,17 +23,17 @@ export async function createPlaylistAction(data: PlaylistOptionalDefaults) {
   }
 
   // バリデーション成功の場合、DB処理
-  const res = await createPlaylist(data);
+  const res = await createVideo(data);
   // 一覧画面のキャッシュ削除
-  revalidatePath("/playlist");
+  revalidatePath("/video");
   // 結果を返す
   return res;
 }
 
 // 更新処理を行うサーバーアクション関数
-export async function editPlaylistAction(data: Playlist) {
+export async function editVideoAction(data: Video) {
   // Zodによるバリデーションを実行する
-  const result = PlaylistSchema.safeParse(data);
+  const result = VideoSchema.safeParse(data);
 
   // バリデーション失敗の場合、errorを返す
   if (!result.success) {
@@ -44,10 +44,10 @@ export async function editPlaylistAction(data: Playlist) {
   }
 
   // バリデーション成功の場合、DB処理
-  const res = await updatePlaylist(data);
+  const res = await updateVideo(data);
 
   // 一覧画面のキャッシュ削除
-  revalidatePath("/playlist");
+  revalidatePath("/video");
   // 結果を返す
   return res;
 }

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { HiPencil } from "react-icons/hi2";
-import { PiPlaylistBold } from "react-icons/pi";
-import { type Playlist } from "@/db/prisma/generated/zod/index";
+import { type Video } from "@/db/prisma/generated/zod/index";
 
 type Props = {
-  list: Playlist[];
+  list: Video[];
 };
 
 export function Table({ list }: Props) {
@@ -13,7 +12,7 @@ export function Table({ list }: Props) {
       <table className="w-full text-left">
         <TableHead />
         <tbody>
-          {list.map((e: Playlist) => (
+          {list.map((e: Video) => (
             <TableRow key={e.id} {...e} />
           ))}
         </tbody>
@@ -27,30 +26,28 @@ function TableHead() {
     <thead className="text-gray-100 bg-orange-700">
       <tr>
         <th className="p-3">ID</th>
-        <th className="p-3">NAME</th>
+        <th className="p-3">TITLE</th>
+        <th className="p-3">VIDEOID</th>
+        <th className="p-3">SEQ</th>
         <th className="p-3">ACTION</th>
       </tr>
     </thead>
   );
 }
 
-function TableRow({ id, name }: Playlist) {
+function TableRow({ id, title, videoId, seq, playlistId }: Video) {
   return (
     <tr className="odd:bg-white even:bg-orange-100 border-b">
       <td className="p-3">{id}</td>
-      <td className="p-3">{name}</td>
+      <td className="p-3">{title}</td>
+      <td className="p-3">{videoId}</td>
+      <td className="p-3">{seq}</td>
       <td className="p-3 flex justify-start gap-4">
         <Link
-          href={`/playlist/${id}/edit`}
+          href={`/video/${playlistId}/${id}/edit`}
           className="text-lg text-blue-500 hover:text-blue-800"
         >
           <HiPencil />
-        </Link>
-        <Link
-          href={`/video/${id}`}
-          className="text-lg text-blue-500 hover:text-blue-800"
-        >
-          <PiPlaylistBold />
         </Link>
       </td>
     </tr>

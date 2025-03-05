@@ -1,4 +1,4 @@
-import { type Playlist } from "@/db/prisma/generated/zod/index";
+import { type Playlist, type Video } from "@/db/prisma/generated/zod/index";
 
 export type SignInActionReturnType =
   | undefined
@@ -164,4 +164,15 @@ export type PlaylistCreateFormProps = {
 
 export type PlaylistEditFormProps = {
   defaultValues: Playlist;
+};
+
+export type VideoCreateFormProps = {
+  defaultValues: {
+    playlistId: number;
+    seq: number;
+  };
+};
+
+export type VideoEditFormProps = {
+  defaultValues: Video;
 };
