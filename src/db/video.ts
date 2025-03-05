@@ -15,7 +15,7 @@ export async function getVideos() {
 }
 
 export async function getVideosByPlaylistId(playlistId: number) {
-  // ユーザIDで検索
+  // プレイリストIDで検索
   const result = await prisma.video.findMany({
     where: {
       playlistId,

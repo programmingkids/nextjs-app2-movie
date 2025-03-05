@@ -52,3 +52,9 @@ export type VideoEditPageProps = {
     id: string;
   };
 };
+
+export type WatchlistPageProps = {
+  params: {
+    id: string;
+  };
+};

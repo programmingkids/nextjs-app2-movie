@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HiPencil } from "react-icons/hi2";
 import { PiPlaylistBold } from "react-icons/pi";
+import { FaCirclePlay } from "react-icons/fa6";
 import { type Playlist } from "@/db/prisma/generated/zod/index";
 
 type Props = {
@@ -51,6 +52,12 @@ function TableRow({ id, name }: Playlist) {
           className="text-lg text-blue-500 hover:text-blue-800"
         >
           <PiPlaylistBold />
+        </Link>
+        <Link
+          href={`/watchlist/${id}`}
+          className="text-lg text-blue-500 hover:text-blue-800"
+        >
+          <FaCirclePlay />
         </Link>
       </td>
     </tr>
