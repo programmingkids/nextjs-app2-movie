@@ -53,7 +53,7 @@ export async function editVideoAction(data: Video) {
 }
 
 export async function deleteVideoAction(id: number) {
-  // DBからレビューを削除
+  // DBからビデオを削除
   await deleteVideoById(id);
 
   // 一覧画面のキャッシュ削除

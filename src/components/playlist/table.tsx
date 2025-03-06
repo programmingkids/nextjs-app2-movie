@@ -3,6 +3,7 @@ import { HiPencil } from "react-icons/hi2";
 import { PiPlaylistBold } from "react-icons/pi";
 import { FaCirclePlay } from "react-icons/fa6";
 import { type Playlist } from "@/db/prisma/generated/zod/index";
+import { Delete } from "@/components/playlist/delete";
 
 type Props = {
   list: Playlist[];
@@ -59,6 +60,7 @@ function TableRow({ id, name }: Playlist) {
         >
           <FaCirclePlay />
         </Link>
+        <Delete {...{ id, title: name }} />
       </td>
     </tr>
   );

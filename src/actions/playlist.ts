@@ -1,7 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createPlaylist, updatePlaylist } from "@/db/playlist";
+import {
+  createPlaylist,
+  updatePlaylist,
+  deletePlaylistById,
+} from "@/db/playlist";
 import {
   type Playlist,
   type PlaylistOptionalDefaults,
@@ -50,4 +54,17 @@ export async function editPlaylistAction(data: Playlist) {
   revalidatePath("/playlist");
   // 結果を返す
   return res;
+}
+
+export async function deletePlaylistAction(id: number) {
+  // DBからプレイリストを削除
+  await deletePlaylistById(id);
+
+  // 一覧画面のキャッシュ削除
+  revalidatePath("/playlist");
+
+  // 結果を返す
+  return {
+    success: true,
+  };
 }
