@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HiPencil } from "react-icons/hi2";
 import { type Video } from "@/db/prisma/generated/zod/index";
+import { Delete } from "@/components/video/delete";
 
 type Props = {
   list: Video[];
@@ -49,6 +50,7 @@ function TableRow({ id, title, videoId, seq, playlistId }: Video) {
         >
           <HiPencil />
         </Link>
+        <Delete {...{ id, title }} />
       </td>
     </tr>
   );

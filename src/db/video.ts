@@ -108,11 +108,10 @@ export async function updateVideo(data: Video) {
   }
 }
 
-/*
-export async function deletePlaylistById(id: number) {
+export async function deleteVideoById(id: number) {
   // 削除
   try {
-    const result = await prisma.playlist.delete({
+    const result = await prisma.video.delete({
       where: {
         id,
       },
@@ -129,4 +128,3 @@ export async function deletePlaylistById(id: number) {
     };
   }
 }
-*/

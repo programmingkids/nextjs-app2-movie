@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createVideo, updateVideo } from "@/db/video";
+import { createVideo, updateVideo, deleteVideoById } from "@/db/video";
 import {
   type Video,
   type VideoOptionalDefaults,
@@ -50,4 +50,17 @@ export async function editVideoAction(data: Video) {
   revalidatePath("/video");
   // 結果を返す
   return res;
+}
+
+export async function deleteVideoAction(id: number) {
+  // DBからレビューを削除
+  await deleteVideoById(id);
+
+  // 一覧画面のキャッシュ削除
+  revalidatePath("/video");
+
+  // 結果を返す
+  return {
+    success: true,
+  };
 }

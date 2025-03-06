@@ -176,3 +176,18 @@ export type VideoCreateFormProps = {
 export type VideoEditFormProps = {
   defaultValues: Video;
 };
+
+export type DeleteProps = {
+  id: number;
+  title: string;
+};
+
+export type DeleteModalProps = {
+  id: number;
+  title: string;
+  open: boolean;
+  onClose: () => void;
+  mainText: string;
+  successText: string;
+  cancelText: string;
+};
