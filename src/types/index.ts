@@ -191,3 +191,16 @@ export type DeleteModalProps = {
   successText: string;
   cancelText: string;
 };
+
+export type BreadcrumbParam = {
+  title: string;
+  href: string;
+  current: boolean;
+  home: boolean;
+};
+
+export type BreadcrumbList = BreadcrumbParam[];
+
+export type BreadcrumbProps = {
+  bcList: BreadcrumbList;
+};

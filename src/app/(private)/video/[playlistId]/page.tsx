@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { PiPlaylistBold } from "react-icons/pi";
 import { MdOutlineAdd } from "react-icons/md";
 import { type VideoListPageProps } from "@/types/page";
+import { type BreadcrumbList } from "@/types/index";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { getAuth } from "@/hooks/auth/server";
 import { getPlaylistById } from "@/db/playlist";
 import { getVideosByPlaylistId } from "@/db/video";
@@ -34,12 +36,36 @@ export default async function Page(props: VideoListPageProps) {
   // プレイリストIDで一覧データを取得
   const list = await getVideosByPlaylistId(playlistId);
 
+  const bcList: BreadcrumbList = [
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+      current: false,
+      home: true,
+    },
+    {
+      title: "Playlist",
+      href: "/playlist",
+      current: false,
+      home: false,
+    },
+    {
+      title: "Videolist",
+      href: `/video/${playlistId}`,
+      current: true,
+      home: false,
+    },
+  ];
+
   return (
     <>
       <h1 className="mb-4 p-4 text-center bg-orange-500 text-white text-lg">
         <PiPlaylistBold className="inline align-bottom mr-2 text-2xl" />
         Video List
       </h1>
+      <div className="my-4 px-6">
+        <Breadcrumb {...{ bcList }} />
+      </div>
       <div className="py-4 px-6">
         <Table {...{ list }} />
       </div>

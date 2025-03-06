@@ -2,6 +2,8 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { MdOutlineAdd } from "react-icons/md";
+import { type BreadcrumbList } from "@/types/index";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { getAuth } from "@/hooks/auth/server";
 import { getPlaylistByUserId } from "@/db/playlist";
 import { Table } from "@/components/playlist/table";
@@ -9,6 +11,21 @@ import { Table } from "@/components/playlist/table";
 export const metadata: Metadata = {
   title: "Playlist",
 };
+
+const bcList: BreadcrumbList = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    current: false,
+    home: true,
+  },
+  {
+    title: "Playlist",
+    href: "/playlist",
+    current: true,
+    home: false,
+  },
+];
 
 export default async function Page() {
   const {
@@ -24,6 +41,9 @@ export default async function Page() {
         <MdOutlineFeaturedPlayList className="inline align-bottom mr-2 text-2xl" />
         Playlist
       </h1>
+      <div className="my-4 px-6">
+        <Breadcrumb {...{ bcList }} />
+      </div>
       <div className="py-4 px-6">
         <Table {...{ list }} />
       </div>
