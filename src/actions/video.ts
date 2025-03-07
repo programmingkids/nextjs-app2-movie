@@ -1,7 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createVideo, updateVideo, deleteVideoById } from "@/db/video";
+import {
+  createVideo,
+  updateVideo,
+  deleteVideoById,
+  updateVideoSeq,
+} from "@/db/video";
 import {
   type Video,
   type VideoOptionalDefaults,
@@ -58,6 +63,16 @@ export async function deleteVideoAction(id: number) {
 
   // 一覧画面のキャッシュ削除
   revalidatePath("/video");
+
+  // 結果を返す
+  return {
+    success: true,
+  };
+}
+
+export async function reorderVideoAction(list: Video[]) {
+  // プレイリスト内のビデオを並び替える
+  await updateVideoSeq(list);
 
   // 結果を返す
   return {

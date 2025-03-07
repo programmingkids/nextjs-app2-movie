@@ -128,3 +128,25 @@ export async function deleteVideoById(id: number) {
     };
   }
 }
+
+export async function updateVideoSeq(list: Video[]) {
+  // SEQ更新
+  try {
+    list.map(({ id, seq }) => {
+      (async () => {
+        const result = await prisma.video.update({
+          where: { id },
+          data: {
+            seq,
+          },
+        });
+      })();
+    });
+  } catch {
+    // データベースエラー発生
+    return {
+      success: false,
+      error: { server_error: ["Database Error"] },
+    };
+  }
+}
