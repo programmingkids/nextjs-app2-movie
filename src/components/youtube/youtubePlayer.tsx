@@ -7,6 +7,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { FaAnglesLeft } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
 import { type YoutubePlayerProps } from "@/types/index";
+import { Add } from "@/components/playlist/add";
 
 export function YoutubePlayer({
   videoList,
@@ -145,8 +146,13 @@ export function YoutubePlayer({
           </button>
         </div>
       </div>
-      <div className="mb-5 text-4xl lg:text-2xl font-bold">
-        {videoList[currentPlay].title}
+      <div className="flex justify-between mb-5">
+        <div className="text-4xl lg:text-2xl font-bold">
+          {videoList[currentPlay].title}
+        </div>
+        <div>
+          <Add {...videoList[currentPlay]} />
+        </div>
       </div>
     </div>
   );

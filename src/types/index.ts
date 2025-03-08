@@ -192,6 +192,21 @@ export type DeleteModalProps = {
   cancelText: string;
 };
 
+export type AddProps = {
+  videoId: string;
+  title: string;
+};
+
+export type AddModalProps = {
+  videoId: string;
+  title: string;
+  open: boolean;
+  onClose: () => void;
+  mainText: string;
+  successText: string;
+  cancelText: string;
+};
+
 export type BreadcrumbParam = {
   title: string;
   href: string;

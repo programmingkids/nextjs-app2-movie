@@ -24,3 +24,10 @@ export type BottomNavigationIconLinkType = Pick<
   IconButtonLinkProps,
   "href" | "text" | "icon"
 >;
+
+export type CircleIconButtonProps = {
+  color: Color;
+  icon: React.ReactNode;
+  text: string;
+  onClick: () => void;
+};
