@@ -7,10 +7,9 @@ export const metadata: Metadata = {
   title: "Watch Playlist",
 };
 
-export default async function Page(props: WatchlistPageProps) {
+export default async function Page({ params }: WatchlistPageProps) {
   // /watchlist/[id]
-  const params = await props.params;
-  const id = params.id;
+  const { id } = await params;
 
   // 型変換
   const playlistId = parseInt(id as string, 10);

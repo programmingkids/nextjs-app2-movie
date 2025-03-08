@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   title: "Watch",
 };
 
-export default async function Page(props: SearchPageProps) {
+export default async function Page({ params }: SearchPageProps) {
   // /watch/{videoId}
-  const params = await props.params;
-  const [videoId = ""] = params.slug || [];
+  const { slug } = await params;
+  const [videoId = ""] = slug || [];
   /*
   // VideoIdでAPI検索
   const { items } = await getMovieByVideoId(videoId);
