@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import ReactPlayer from "react-player/youtube";
-import { FaPlay } from "react-icons/fa6";
-import { FaPause } from "react-icons/fa6";
-import { FaAnglesRight } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa6";
-import { FaAnglesLeft } from "react-icons/fa6";
-import { FaAngleLeft } from "react-icons/fa6";
+import {
+  FaPlay,
+  FaPause,
+  FaAnglesRight,
+  FaAngleRight,
+  FaAnglesLeft,
+  FaAngleLeft,
+} from "react-icons/fa6";
 import { type YoutubePlayerProps } from "@/types/index";
 import { Add } from "@/components/playlist/add";
 

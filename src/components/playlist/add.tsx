@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { FaRegBookmark } from "react-icons/fa6";
 import { type AddProps } from "@/types/index";
-import { AddModal } from "@/components/playlist/addModal";
 import { CircleIconButton } from "@/components/ui/button";
+import { AddModal } from "@/components/playlist/addModal";
 
 export function Add({ videoId, title }: AddProps) {
   const [open, setOpen] = useState(false);
