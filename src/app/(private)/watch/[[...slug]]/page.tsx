@@ -2,10 +2,13 @@ import { type Metadata } from "next";
 import { type SearchPageProps } from "@/types/page";
 import {
   type YoutubeVideoById,
+  type YoutubeVideoItem,
+  type YoutubePlayerVideo,
   type YoutubePlayerVideoList,
 } from "@/types/index";
 import { getMovieByVideoId, getMovieByKeyword } from "@/lib/youtube";
 import { YoutubePlayerController } from "@/components/youtube/youtubePlayerController";
+import { videoList } from "@/config/dammy";
 
 export const metadata: Metadata = {
   title: "Watch",
@@ -15,7 +18,7 @@ export default async function Page(props: SearchPageProps) {
   // /watch/{videoId}
   const params = await props.params;
   const [videoId = ""] = params.slug || [];
-
+  /*
   // VideoIdでAPI検索
   const { items } = await getMovieByVideoId(videoId);
   //console.dir(items, { depth: null });
@@ -45,14 +48,14 @@ export default async function Page(props: SearchPageProps) {
       title: v.snippet.title,
     })),
     ...relatedItems
-      .map((v: YoutubeVideoById) => ({
+      .map((v: YoutubeVideoItem) => ({
         videoId: v.id.videoId,
         title: v.snippet.title,
       }))
-      .filter((v: string) => v.videoId !== mainItem["videoId"]),
+      .filter((v: YoutubePlayerVideo) => v.videoId !== mainItem["videoId"]),
   ];
   //console.log(videoList);
-
+  */
   return (
     <>
       {videoId == "" ? (

@@ -15,10 +15,9 @@ export const metadata: Metadata = {
   title: "Playlist",
 };
 
-export default async function Page(props: VideoListPageProps) {
+export default async function Page({ params }: VideoListPageProps) {
   // /voide/[playlistId]
-  const params = await props.params;
-  const id = params.playlistId;
+  const { playlistId: id } = await params;
   // 型変換
   const playlistId = parseInt(id as string, 10);
 

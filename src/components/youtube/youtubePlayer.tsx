@@ -13,7 +13,7 @@ export function YoutubePlayer({
   currentPlay,
   setCurrentPlay,
 }: YoutubePlayerProps) {
-  const videoRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<ReactPlayer>(null);
   const [playLabel, setPlayLabel] = useState(<FaPlay />);
   const [playing, setPlaying] = useState(false);
   const [hasWindow, setHasWindow] = useState(false);
@@ -29,7 +29,7 @@ export function YoutubePlayer({
   }
 
   function handleClickSeekTo(sec: number) {
-    const player = videoRef.current;
+    const player = playerRef.current;
     if (player) {
       const currentSec = player.getCurrentTime() ?? 0;
       player.seekTo(currentSec + sec);
@@ -73,7 +73,7 @@ export function YoutubePlayer({
     <div className="aspect-video">
       {hasWindow && (
         <ReactPlayer
-          ref={videoRef}
+          ref={playerRef}
           url={`https://www.youtube.com/watch?v=${videoList[currentPlay].videoId}`}
           playing={playing}
           controls={true}

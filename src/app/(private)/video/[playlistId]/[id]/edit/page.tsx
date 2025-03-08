@@ -13,12 +13,11 @@ export const metadata: Metadata = {
   title: "Video Edit",
 };
 
-export default async function Page(props: VideoEditPageProps) {
+export default async function Page({ params }: VideoEditPageProps) {
   // /playlist/[playlistId]/[id]/edit
-  const params = await props.params;
-  const { playlistId: playlistIdT, id: idT } = params;
+  const { playlistId: pIdT, id: idT } = await params;
   // 型変換
-  const playlistId = parseInt(playlistIdT as string, 10);
+  const playlistId = parseInt(pIdT as string, 10);
   const id = parseInt(idT as string, 10);
 
   const {

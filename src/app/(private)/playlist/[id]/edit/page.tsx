@@ -12,10 +12,9 @@ export const metadata: Metadata = {
   title: "Playlist Edit",
 };
 
-export default async function Page(props: PlaylisteEditPageProps) {
+export default async function Page({ params }: PlaylisteEditPageProps) {
   // /playlist/{id}/edit
-  const params = await props.params;
-  const id = params.id;
+  const { id } = await params;
   // 型変換
   const playlistId = parseInt(id as string, 10);
 

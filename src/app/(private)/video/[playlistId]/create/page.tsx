@@ -12,10 +12,9 @@ export const metadata: Metadata = {
   title: "Video Create",
 };
 
-export default async function Page(props: VideoCreatePageProps) {
+export default async function Page({ params }: VideoCreatePageProps) {
   // /voide/[playlistId]/create
-  const params = await props.params;
-  const id = params.playlistId;
+  const { playlistId: id } = await params;
   // 型変換
   const playlistId = parseInt(id as string, 10);
 

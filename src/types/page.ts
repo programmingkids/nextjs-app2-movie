@@ -15,9 +15,9 @@ export type AuthUserProviderProps = Readonly<{
 }>;
 
 export type SearchPageProps = {
-  params: {
+  params: Promise<{
     slug?: string[];
-  };
+  }>;
 };
 
 export type MovieListProps = {
@@ -29,32 +29,32 @@ export type MovieItemProps = {
 };
 
 export type PlaylisteEditPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export type VideoListPageProps = {
-  params: {
+  params: Promise<{
     playlistId: string;
-  };
+  }>;
 };
 
 export type VideoCreatePageProps = {
-  params: {
+  params: Promise<{
     playlistId: string;
-  };
+  }>;
 };
 
 export type VideoEditPageProps = {
-  params: {
+  params: Promise<{
     playlistId: string;
     id: string;
-  };
+  }>;
 };
 
 export type WatchlistPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };

@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   title: "Search",
 };
 
-export default async function Page(props: SearchPageProps) {
+export default async function Page({ params }: SearchPageProps) {
   // /seach/{keyword}
-  const params = await props.params;
-  const [q = ""] = params.slug || [];
+  const { slug } = await params;
+  const [q = ""] = slug || [];
   const keyword = decodeURIComponent(q);
 
   // APIで検索

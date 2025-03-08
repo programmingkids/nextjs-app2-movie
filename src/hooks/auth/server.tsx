@@ -102,7 +102,7 @@ export async function getAuthSign() {
 
 export async function isAuth() {
   // Server Side Client
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

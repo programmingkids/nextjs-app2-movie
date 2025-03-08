@@ -21,12 +21,6 @@ export function ProfileUpdateForm() {
     fullname: userName,
   };
 
-  useEffect(() => {
-    if (userName) {
-      reset({ fullname: userName });
-    }
-  }, [userName]);
-
   const { register, handleSubmit, reset, formState, setError, clearErrors } =
     useForm<ProfileFormType>({
       resolver: zodResolver(ProfileFormSchema),
@@ -51,6 +45,12 @@ export function ProfileUpdateForm() {
       });
     }
   };
+
+  useEffect(() => {
+    if (userName) {
+      reset({ fullname: userName });
+    }
+  }, [userName, reset]);
 
   return (
     <div className="relative">
