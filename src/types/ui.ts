@@ -42,7 +42,7 @@ export type IconButtonProps = ButtonProps & {
   icon: React.ReactNode;
 };
 
-export type CircleIconButtonProps = Omit<IconButtonProps, "label" | "full">;
+export type CircleIconButtonProps = Omit<IconButtonProps, "full">;
 
 // Link
 export type ButtonLinkProps = {
