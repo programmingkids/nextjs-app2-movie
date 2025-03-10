@@ -55,3 +55,7 @@ export type ButtonLinkProps = {
 export type IconButtonLinkProps = ButtonLinkProps & {
   icon: React.ReactNode;
 };
+
+export type SpinnerProps = {
+  color: Color;
+};

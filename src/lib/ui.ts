@@ -203,3 +203,36 @@ export function createButtonLinkColorClassName(color?: Color) {
   const c1 = buttonLinkColor[color as Color] ?? defaultButtonLinkColor;
   return `inline-block rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-offset-1 ${c1}`;
 }
+
+// LoadingSpinner
+export const loadingSpinnerColor: { [key in Color]: string } = {
+  red: "fill-red-600",
+  orange: "fill-orange-600",
+  amber: "fill-amber-600",
+  yellow: "fill-yellow-600",
+  lime: "fill-lime-600",
+  green: "fill-green-600",
+  emerald: "fill-emerald-600",
+  teal: "fill-teal-600",
+  cyan: "fill-cyan-600",
+  sky: "fill-sky-600",
+  blue: "fill-blue-600",
+  indigo: "fill-indigo-600",
+  violet: "fill-violet-600",
+  purple: "fill-purple-600",
+  fuchsia: "fill-fuchsia-600",
+  pink: "fill-pink-600",
+  rose: "fill-rose-600",
+  slate: "fill-slate-600",
+  gray: "fill-gray-600",
+  zinc: "fill-zinc-600",
+  neutral: "fill-neutral-600",
+  stone: "fill-stone-600",
+};
+
+export const defaultLoadingSpinnerColor = "fill-blue-600";
+
+export function createSpinnerClassName(color?: Color) {
+  const c = loadingSpinnerColor[color as Color] ?? defaultLoadingSpinnerColor;
+  return `inline w-8 h-8 text-gray-200 animate-spin ${c}`;
+}
