@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import {
@@ -13,6 +14,7 @@ import {
   createLoadingButtonColorClassName,
   createIconButtonColorClassName,
   createCircleIconButtonColorClassName,
+  createFullClassName,
 } from "@/lib/ui";
 
 export function Button({
@@ -23,7 +25,10 @@ export function Button({
   full,
   color,
 }: ButtonProps) {
-  const cn = createButtonColorClassName(color);
+  const cn = useMemo(
+    () => createFullClassName(full, createButtonColorClassName(color)),
+    [color, full],
+  );
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {label}
@@ -34,13 +39,16 @@ export function Button({
 export function LoadingButton({
   type = "button",
   label,
-  disabled = false,
+  disabled,
   onClick,
   full,
   color,
   isProcessing,
 }: LoadingButtonProps) {
-  const cn = createLoadingButtonColorClassName(color);
+  const cn = useMemo(
+    () => createFullClassName(full, createLoadingButtonColorClassName(color)),
+    [color, full],
+  );
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {label}
@@ -60,7 +68,10 @@ export function IconButton({
   color,
   icon,
 }: IconButtonProps) {
-  const cn = createIconButtonColorClassName(color);
+  const cn = useMemo(
+    () => createFullClassName(full, createIconButtonColorClassName(color)),
+    [color, full],
+  );
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {icon}
@@ -71,14 +82,24 @@ export function IconButton({
 
 export function CircleIconButton({
   type = "button",
+  label,
   disabled = false,
   onClick,
   color,
   icon,
 }: CircleIconButtonProps) {
-  const cn = createCircleIconButtonColorClassName(color);
+  const cn = useMemo(
+    () => createCircleIconButtonColorClassName(color),
+    [color],
+  );
   return (
-    <button type={type} className={cn} disabled={disabled} onClick={onClick}>
+    <button
+      type={type}
+      className={cn}
+      disabled={disabled}
+      onClick={onClick}
+      title={label}
+    >
       {icon}
     </button>
   );

@@ -17,9 +17,9 @@ export function Add({ videoId, title }: AddProps) {
     <>
       <CircleIconButton
         type="button"
-        label="hoge"
+        label="playlist"
         color="blue"
-        icon={<FaRegBookmark />}
+        icon={<FaRegBookmark className="" />}
         onClick={handleClick}
       />
       {open && (
