@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { type AddModalProps } from "@/types/index";
-import { deletePlaylistAction } from "@/actions/playlist";
+import { type Playlist } from "@/db/prisma/generated/zod/index";
+import { LoadingSpinner } from "@/components/ui/spinner";
+import { getPlaylistAction } from "@/actions/playlist";
 
 export function AddModal({
   videoId,
@@ -78,8 +81,7 @@ export function AddModal({
           </div>
           <div className="p-5">
             <div className="text-center">
-              <div className="pb-4 font-bold">{title}</div>
-              <div className="pb-8">videoId: {videoId}</div>
+              <PlaylisetSelectBox />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 p-5 border-t rounded-b-lg">
@@ -107,5 +109,37 @@ export function AddModal({
     </div>
   ) : (
     <></>
+  );
+}
+
+import { timeout } from "@/lib/functions";
+
+export function PlaylisetSelectBox() {
+  const [playlist, setPlaylist] = useState<Playlist[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      //await timeout(2000);
+      const playlist = await getPlaylistAction();
+      setPlaylist(playlist);
+    })();
+  }, []);
+
+  return playlist.length > 0 ? (
+    <form className="mx-auto">
+      <select
+        id="index"
+        size={3}
+        className=" text-gray-800 text-lg w-full border border-1 border-gray-400 focus:outline-none"
+      >
+        {playlist.map((e, i) => (
+          <option key={i} value={i} className="p-2">
+            {e.name}
+          </option>
+        ))}
+      </select>
+    </form>
+  ) : (
+    <LoadingSpinner color="orange" />
   );
 }

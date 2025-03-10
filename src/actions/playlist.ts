@@ -2,16 +2,18 @@
 
 import { revalidatePath } from "next/cache";
 import {
-  createPlaylist,
-  updatePlaylist,
-  deletePlaylistById,
-} from "@/db/playlist";
-import {
   type Playlist,
   type PlaylistOptionalDefaults,
   PlaylistSchema,
   PlaylistOptionalDefaultsSchema,
 } from "@/db/prisma/generated/zod/index";
+import {
+  createPlaylist,
+  updatePlaylist,
+  deletePlaylistById,
+  getPlaylistByUserId,
+} from "@/db/playlist";
+import { getAuth } from "@/hooks/auth/server";
 
 // 新規登録処理を行うサーバーアクション関数
 export async function createPlaylistAction(data: PlaylistOptionalDefaults) {
@@ -67,4 +69,18 @@ export async function deletePlaylistAction(id: number) {
   return {
     success: true,
   };
+}
+
+export async function getPlaylistAction() {
+  const {
+    user: { id: userId },
+  } = await getAuth();
+
+  const list = getPlaylistByUserId(userId);
+
+  // 一覧画面のキャッシュ削除
+  //revalidatePath("/playlist");
+
+  // 結果を返す
+  return list;
 }
