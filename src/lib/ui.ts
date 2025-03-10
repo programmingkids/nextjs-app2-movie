@@ -139,10 +139,9 @@ export function createIconButtonColorClassName(color?: Color) {
 
 // CircleIconButton
 
-export const circleIcnoButtonColor: { [key in Color]: string } = {
+export const circleIconButtonColor: { [key in Color]: string } = {
   red: "text-white bg-red-500 hover:bg-red-800 focus:ring-red-300",
-  orange:
-    "text-white bg-orange-500 hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-red-300",
+  orange: "text-white bg-orange-500 hover:bg-orange-700 focus:ring-red-300",
   amber: "text-white bg-amber-500 hover:bg-amber-800 focus:ring-amber-300",
   yellow: "text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-yellow-300",
   lime: "text-white bg-lime-500 hover:bg-lime-800 focus:ring-lime-300",
@@ -154,7 +153,7 @@ export const circleIcnoButtonColor: { [key in Color]: string } = {
   teal: "text-white bg-teal-500 hover:bg-teal-800 focus:ring-teal-300",
   cyan: "text-white bg-cyan-500 hover:bg-cyan-800 focus:ring-cyan-300",
   sky: "text-white bg-sky-500 hover:bg-sky-800 focus:ring-sky-300",
-  blue: "text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300",
+  blue: "text-white bg-blue-500 hover:bg-blue-800 focus:ring-blue-300",
   indigo: "text-white bg-indigo-500 hover:bg-indigo-800 focus:ring-indigo-300",
   violet: "text-white bg-violet-500 hover:bg-violet-800 focus:ring-violet-300",
   purple: "text-white bg-purple-500 hover:bg-purple-800 focus:ring-purple-300",
@@ -175,7 +174,7 @@ export const defaultCircleIconButtonColor =
 
 export function createCircleIconButtonColorClassName(color?: Color) {
   const c1 =
-    circleIcnoButtonColor[color as Color] ?? defaultCircleIconButtonColor;
+    circleIconButtonColor[color as Color] ?? defaultCircleIconButtonColor;
   return `inline-flex items-center me-2 p-2.5 text-sm font-medium text-center rounded-full focus:outline-none focus:ring-4 ${c1}`;
 }
 
