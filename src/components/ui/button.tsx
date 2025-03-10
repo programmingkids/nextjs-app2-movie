@@ -8,6 +8,13 @@ import {
   type CircleIconButtonProps,
 } from "@/types/ui";
 
+import {
+  createButtonColorClassName,
+  createLoadingButtonColorClassName,
+  createIconButtonColorClassName,
+  createCircleIconButtonColorClassName,
+} from "@/lib/ui";
+
 export function Button({
   type = "button",
   label,
@@ -16,7 +23,7 @@ export function Button({
   full,
   color,
 }: ButtonProps) {
-  const cn = "hoge";
+  const cn = createButtonColorClassName(color);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {label}
@@ -33,7 +40,7 @@ export function LoadingButton({
   color,
   isProcessing,
 }: LoadingButtonProps) {
-  const cn = "hoge";
+  const cn = createLoadingButtonColorClassName(color);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {label}
@@ -53,7 +60,7 @@ export function IconButton({
   color,
   icon,
 }: IconButtonProps) {
-  const cn = "hoge";
+  const cn = createIconButtonColorClassName(color);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {icon}
@@ -69,7 +76,7 @@ export function CircleIconButton({
   color,
   icon,
 }: CircleIconButtonProps) {
-  const cn = "hoge";
+  const cn = createCircleIconButtonColorClassName(color);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {icon}
