@@ -3,11 +3,14 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { HiOutlineXMark } from "react-icons/hi2";
-import { type AddModalProps } from "@/types/index";
+import { type AddModalProps, type PlaylistAddModalType, PlaylistAddModalSchema } from "@/types/index";
 import { type Playlist } from "@/db/prisma/generated/zod/index";
 import { LoadingSpinner } from "@/components/ui/spinner";
+import { LoadingButton } from '@/components/ui/button';
 import { getPlaylistAction } from "@/actions/playlist";
+import { createVideoAction } from "@/actions/video";
 
 export function AddModal({
   videoId,
@@ -32,20 +35,6 @@ export function AddModal({
     // モーダルにフォーカスを設定する
     modalRef.current?.focus();
   }, [open]);
-
-  // Formの入力パーツの初期化
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm({
-    defaultValues: { videoId },
-  });
-
-  // onSubmitイベントのハンドラー
-  const onSubmit: SubmitHandler<{ videoId: string }> = async () => {
-    // await deletePlaylistAction(id);
-    onClose();
-  };
 
   return open ? (
     <div
@@ -81,20 +70,12 @@ export function AddModal({
           </div>
           <div className="p-5">
             <div className="text-center">
-              <PlaylisetSelectBox />
+              <PlaylisetSelectBox {...{videoId, title, onClose}}/>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 p-5 border-t rounded-b-lg">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <button
-                data-modal-hide="static-modal"
-                type="submit"
-                className="w-full p-3 rounded bg-red-500 text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 disabled:bg-red-300 disabled:cursor-not-allowed"
-                disabled={isSubmitting}
-              >
-                {successText}
-              </button>
-            </form>
+          <hr className="h-px border-gray-400" />
+          <div className="grid grid-cols-2 gap-4 p-5">
+            <input type="text" className="border border-2 px-4 border-orange-400" placeholder="新規プレイリスト名前"/>
             <button
               data-modal-hide="static-modal"
               type="button"
@@ -112,25 +93,51 @@ export function AddModal({
   );
 }
 
-import { timeout } from "@/lib/functions";
+//import { timeout } from "@/lib/functions";
 
-export function PlaylisetSelectBox() {
+export function PlaylisetSelectBox({
+  videoId, 
+  title, 
+  onClose
+}: {
+  videoId:string, 
+  title:string,
+  onClose: () => void,
+}) {
   const [playlist, setPlaylist] = useState<Playlist[]>([]);
 
+  // Formの入力パーツの初期化
+  const { register, handleSubmit, formState, setError, clearErrors } =
+    useForm<PlaylistAddModalType>({
+      resolver: zodResolver(PlaylistAddModalSchema),
+  });
+  const { errors, isDirty, isValid, isSubmitting } = formState;
+  
+  // onSubmitイベントのハンドラー
+  const onSubmit: SubmitHandler<PlaylistAddModalType> = async (data:PlaylistAddModalType) => {
+    const {id} = playlist[data.index];
+    await createVideoAction({
+      videoId,
+      title,
+      seq: 0,
+      playlistId:id
+    });
+    onClose();
+  };
+  
   useEffect(() => {
     (async () => {
-      //await timeout(2000);
       const playlist = await getPlaylistAction();
       setPlaylist(playlist);
     })();
   }, []);
 
   return playlist.length > 0 ? (
-    <form className="mx-auto">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <select
-        id="index"
+        {...register("index", { valueAsNumber: true })}
         size={3}
-        className=" text-gray-800 text-lg w-full border border-1 border-gray-400 focus:outline-none"
+        className="text-gray-800 text-lg mb-2 w-full border border-1 border-gray-400 focus:outline-none"
       >
         {playlist.map((e, i) => (
           <option key={i} value={i} className="p-2">
@@ -138,6 +145,15 @@ export function PlaylisetSelectBox() {
           </option>
         ))}
       </select>
+      <div className="mb-4 text-left text-red-500">{errors.index?.message }</div>
+      <div>
+        <LoadingButton 
+          label="登録" 
+          type="submit" 
+          disabled={!isDirty || !isValid || isSubmitting} 
+          isProcessing={isSubmitting}
+          color="blue" full />
+      </div>
     </form>
   ) : (
     <LoadingSpinner color="orange" />

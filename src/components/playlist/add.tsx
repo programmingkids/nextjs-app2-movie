@@ -19,7 +19,7 @@ export function Add({ videoId, title }: AddProps) {
         type="button"
         label="playlist"
         color="blue"
-        icon={<FaRegBookmark className="" />}
+        icon={<FaRegBookmark />}
         onClick={handleClick}
       />
       {open && (

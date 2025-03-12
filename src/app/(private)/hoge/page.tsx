@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button, LoadingButton, IconButton, CircleIconButton } from '@/components/ui/button';
+import { ButtonLink, IconButtonLink } from '@/components/ui/link';
+import { LoadingSpinner } from '@/components/ui/spinner';
 import { FaBasketball } from "react-icons/fa6";
 import { FaBeerMugEmpty } from "react-icons/fa6";
 
@@ -10,72 +12,11 @@ export const metadata: Metadata = {
   title: "Hogehoge",
 };
 
-const cn1 = [
-  "bg-red-400",
-  "text-white",
-  "p-4",
-  "m-4",
-  "hover:bg-red-100",
-  "hover:text-gray-500",
-  "hover:cursor-pointer",
-  "hover:ring",
-  "hover:ring-[10px]",
-  "hover:ring-orange-400",
-];
-const cnStr = cn1.join(" ");
-
-const cn2 = {
-  orange: [
-    "bg-orange-400",
-    "focus:ring",
-    "focus:ring-[5px]",
-    "focus:ring-orange-200",
-    "active:ring",
-    "active:ring-[5px]",
-    "active:ring-orange-200",
-    "active:bg-orange-600",
-    "hover:bg-orange-700",
-    "hover:ring",
-    "hover:ring-[5px]",
-    "hover:ring-orange-200",
-    "disabled:bg-orange-100",
-  ],
-  rose: [
-    "bg-rose-400",
-    "focus:ring",
-    "focus:ring-[5px]",
-    "focus:ring-rose-200",
-    "active:ring",
-    "active:ring-[5px]",
-    "active:ring-rose-200",
-    "active:bg-rose-600",
-    "hover:bg-rose-700",
-    "hover:ring",
-    "hover:ring-[5px]",
-    "hover:ring-rose-200",
-    "disabled:bg-rose-100",
-  ],
-} as const;
-
-function getClassName(color: keyof typeof cn2) {
-  const base = ["text-white", "p-4", "m-4", "outline-none", "rounded-full"];
-  return cn2[color].join(" ") + " " + base.join(" ");
-}
-
 export default function Page() {
   return (
     <div>
       <h1 className="p-4 text-center text-lg bg-blue-500 text-white">Hoge</h1>
       <div className="m-5 text-wrap">{"hoge, ".repeat(100)}</div>
-      <div className="my-4">
-        <div className={cnStr}>hoge</div>
-        <button className={getClassName("orange")}>
-          <AiOutlineLoading3Quarters className="animate-spin" />
-        </button>
-        <button className={getClassName("rose")}>
-          <AiOutlineLoading3Quarters className="animate-spin" />
-        </button>
-      </div>
       <div className="my-4 w-full">
         <Button type="button" label="hoge"/>
         <Button type="button" label="hoge" size="small"/>
@@ -123,6 +64,49 @@ export default function Page() {
         <CircleIconButton type="button" label="hoge" size="base" icon={<FaBeerMugEmpty />} />
         <CircleIconButton type="button" label="hoge" size="large" icon={<FaBeerMugEmpty />} />
       </div>      
+      <div className="p-4">
+        <ButtonLink text="hoge" href="/dashboard" />
+        <ButtonLink text="hoge" href="/dashboard" size="small" />
+        <ButtonLink text="hoge" href="/dashboard" size="base" />
+        <ButtonLink text="hoge" href="/dashboard" size="large" />
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="red"/>
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="yellow"/>
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="green"/>
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="amber"/>
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="rose"/>
+        <ButtonLink text="hoge" href="/dashboard" size="large" color="rose" full/>
+      </div>
+      <div className="p-4">
+        <IconButtonLink text="hoge" href="/dashboard" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="small" icon={<FaBeerMugEmpty className="inline mr-2"/>} />
+        <IconButtonLink text="hoge" href="/dashboard" size="base" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="red" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="yellow" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="green" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="amber" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="rose" icon={<FaBeerMugEmpty className="inline mr-2" />} />
+        <IconButtonLink text="hoge" href="/dashboard" size="large" color="rose" full icon={<FaBeerMugEmpty className="inline mr-2" />} />
+      </div>
+      <div className="p-4">
+        <LoadingSpinner />
+        <LoadingSpinner size="small" />
+        <LoadingSpinner size="base" />
+        <LoadingSpinner size="large" />
+        <LoadingSpinner size="large" color="red" />
+        <LoadingSpinner size="large" color="pink" />
+        <LoadingSpinner size="large" color="rose" />
+        <LoadingSpinner size="large" color="yellow" />
+        <LoadingSpinner size="large" color="orange" />
+        <LoadingSpinner size="large" color="amber" />
+        <LoadingSpinner size="large" color="green" />
+        <LoadingSpinner size="large" color="purple" />
+        <LoadingSpinner size="large" color="cyan" />
+        <LoadingSpinner size="large" color="indigo" />
+        <LoadingSpinner size="large" color="emerald" />
+      </div>
+
+      
       
       
       <div>

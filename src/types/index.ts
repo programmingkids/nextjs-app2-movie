@@ -1,3 +1,4 @@
+import * as z from "zod";
 import { type Playlist, type Video } from "@/db/prisma/generated/zod/index";
 
 export type SignInActionReturnType =
@@ -219,3 +220,9 @@ export type BreadcrumbList = BreadcrumbParam[];
 export type BreadcrumbProps = {
   bcList: BreadcrumbList;
 };
+
+export const PlaylistAddModalSchema = z.object({
+  index: z.number({ message: "必須です" }).int(),
+});
+
+export type PlaylistAddModalType = z.infer<typeof PlaylistAddModalSchema>;

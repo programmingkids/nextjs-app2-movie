@@ -72,14 +72,12 @@ export async function deletePlaylistAction(id: number) {
 }
 
 export async function getPlaylistAction() {
+  // DBからユーザごとのプレイリストの一覧を取得
   const {
     user: { id: userId },
   } = await getAuth();
 
   const list = getPlaylistByUserId(userId);
-
-  // 一覧画面のキャッシュ削除
-  //revalidatePath("/playlist");
 
   // 結果を返す
   return list;
