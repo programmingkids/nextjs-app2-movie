@@ -24,14 +24,19 @@ export type Color =
   | "neutral"
   | "stone";
 
+export type Size = "small" | "base" | "large";
+export type Full = "full" | "base";
+
 // Button
 export type ButtonProps = {
   type: "button" | "submit";
   label: string;
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
   full?: true;
   color?: Color;
+  size?: Size;
 };
 
 export type LoadingButtonProps = ButtonProps & {
@@ -58,4 +63,17 @@ export type IconButtonLinkProps = ButtonLinkProps & {
 
 export type SpinnerProps = {
   color: Color;
+};
+
+export type BtnStyleArgsType = {
+  color?: Color;
+  size?: Size;
+  full?: boolean;
+  className?: string;
+};
+
+export type CircleIconBtnStyleArgsType = {
+  color?: Color;
+  size?: Size;
+  className?: string;
 };

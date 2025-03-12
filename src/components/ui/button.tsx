@@ -1,54 +1,34 @@
 import { useMemo } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
-import {
-  type Color,
-  type ButtonProps,
-  type LoadingButtonProps,
-  type IconButtonProps,
-  type CircleIconButtonProps,
-} from "@/types/ui";
-
-import {
-  createButtonColorClassName,
-  createLoadingButtonColorClassName,
-  createIconButtonColorClassName,
-  createCircleIconButtonColorClassName,
-  createFullClassName,
-} from "@/lib/ui";
+import { type ButtonProps, type LoadingButtonProps, type IconButtonProps, type CircleIconButtonProps } from '@/types/ui';
+import { generateBtnStyle, generateCircleIconBtnStyle } from '@/components/ui/buttonStyle';
 
 export function Button({
-  type = "button",
-  label,
-  disabled = false,
-  onClick,
-  full,
-  color,
+  type = "button", 
+  label, 
+  disabled, 
+  onClick, 
+  className, 
+  full, 
+  color, 
+  size
 }: ButtonProps) {
-  const cn = useMemo(
-    () => createFullClassName(full, createButtonColorClassName(color)),
-    [color, full],
-  );
-  return (
-    <button type={type} className={cn} disabled={disabled} onClick={onClick}>
-      {label}
-    </button>
-  );
+  const cn = useMemo(() => generateBtnStyle({color, size, full, className}),[color, size, full, className]);
+  return <button type={type} disabled={disabled} onClick={onClick} className={cn}>{label}</button>;
 }
 
 export function LoadingButton({
-  type = "button",
-  label,
-  disabled,
-  onClick,
-  full,
-  color,
+  type = "button", 
+  label, 
+  disabled, 
+  onClick, 
+  className, 
+  full, 
+  color, 
+  size,
   isProcessing,
 }: LoadingButtonProps) {
-  const cn = useMemo(
-    () => createFullClassName(full, createLoadingButtonColorClassName(color)),
-    [color, full],
-  );
+  const cn = useMemo(() => generateBtnStyle({color, size, full, className}),[color, size, full, className]);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {label}
@@ -60,18 +40,17 @@ export function LoadingButton({
 }
 
 export function IconButton({
-  type = "button",
-  label,
-  disabled = false,
-  onClick,
-  full,
-  color,
+  type = "button", 
+  label, 
+  disabled, 
+  onClick, 
+  className, 
+  full, 
+  color, 
+  size,
   icon,
 }: IconButtonProps) {
-  const cn = useMemo(
-    () => createFullClassName(full, createIconButtonColorClassName(color)),
-    [color, full],
-  );
+  const cn = useMemo(() => generateBtnStyle({color, size, full, className}),[color, size, full, className]);
   return (
     <button type={type} className={cn} disabled={disabled} onClick={onClick}>
       {icon}
@@ -81,17 +60,16 @@ export function IconButton({
 }
 
 export function CircleIconButton({
-  type = "button",
-  label,
+  type = "button", 
+  label, 
   disabled = false,
-  onClick,
-  color,
+  onClick, 
+  className, 
+  color, 
+  size,
   icon,
 }: CircleIconButtonProps) {
-  const cn = useMemo(
-    () => createCircleIconButtonColorClassName(color),
-    [color],
-  );
+  const cn = useMemo(() => generateCircleIconBtnStyle({color, size, className}),[color, size, className]);
   return (
     <button
       type={type}
