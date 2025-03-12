@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 export type Color =
   | "red"
   | "orange"
@@ -64,8 +62,11 @@ export type IconButtonLinkProps = ButtonLinkProps & {
   icon: React.ReactNode;
 };
 
+// loading
 export type SpinnerProps = {
-  color: Color;
+  className?: string;
+  color?: Color;
+  size?: Size;
 };
 
 // generate function args type
@@ -83,3 +84,5 @@ export type CircleIconBtnStyleArgsType = {
 };
 
 export type BtnLinkStyleArgsType = BtnStyleArgsType;
+
+export type SpinnerStyleArgsType = CircleIconBtnStyleArgsType;
