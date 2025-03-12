@@ -51,10 +51,13 @@ export type CircleIconButtonProps = Omit<IconButtonProps, "full">;
 
 // Link
 export type ButtonLinkProps = {
-  color: Color;
   href: string;
   text: string;
   blank?: boolean;
+  className?: string;
+  full?: true;
+  color?: Color;
+  size?: Size;
 };
 
 export type IconButtonLinkProps = ButtonLinkProps & {
@@ -65,6 +68,7 @@ export type SpinnerProps = {
   color: Color;
 };
 
+// generate function args type
 export type BtnStyleArgsType = {
   color?: Color;
   size?: Size;
@@ -77,3 +81,5 @@ export type CircleIconBtnStyleArgsType = {
   size?: Size;
   className?: string;
 };
+
+export type BtnLinkStyleArgsType = BtnStyleArgsType;

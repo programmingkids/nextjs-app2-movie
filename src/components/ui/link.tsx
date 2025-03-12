@@ -1,28 +1,36 @@
 import Link from "next/link";
-import {
-  type Color,
-  type ButtonLinkProps,
-  type IconButtonLinkProps,
-} from "@/types/ui";
-import { createButtonLinkColorClassName } from "@/lib/ui";
+import { useMemo } from "react";
+import { type ButtonLinkProps, type IconButtonLinkProps } from '@/types/ui';
+import { generateBtnLinkStyle } from '@/components/ui/linkStyle';
 
-export function ButtonLink({ href, text, color, blank }: ButtonLinkProps) {
-  const cn = createButtonLinkColorClassName(color);
+export function ButtonLink({
+  href,
+  text,
+  blank,
+  className,
+  full,
+  color,
+  size,
+}: ButtonLinkProps) {
+  const cn = useMemo(() => generateBtnLinkStyle({color, size, full, className}),[color, size, full, className]);
   return (
     <Link className={cn} href={href} {...(blank && { target: "_blank" })}>
       {text}
     </Link>
-  );
+  )
 }
 
 export function IconButtonLink({
   href,
   text,
-  color,
   blank,
+  className,
+  full,
+  color,
+  size,
   icon,
 }: IconButtonLinkProps) {
-  const cn = createButtonLinkColorClassName(color);
+  const cn = useMemo(() => generateBtnLinkStyle({color, size, full, className}),[color, size, full, className]);
   return (
     <Link className={cn} href={href} {...(blank && { target: "_blank" })}>
       {icon}

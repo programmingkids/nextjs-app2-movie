@@ -1,8 +1,6 @@
 import { tv } from "tailwind-variants";
 import { twMerge } from "tailwind-merge";
 import {
-  type Color,
-  type Size,
   type BtnStyleArgsType,
   type CircleIconBtnStyleArgsType,
 } from "@/types/ui";
