@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { FieldValues } from "react-hook-form";
-import { type TextInputProps, type PasswordInputProps, type TextInputNoLabelProps} from "@/types/form";
+import {
+  type TextInputProps,
+  type PasswordInputProps,
+  type TextInputNoLabelProps,
+} from "@/types/form";
 
 const theme = {
   input: {

@@ -5,18 +5,18 @@ import { useState, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HiOutlineXMark } from "react-icons/hi2";
-import { 
-  type AddModalProps, 
-  type PlaylistAddModalType, 
-  PlaylistAddModalSchema
+import {
+  type AddModalProps,
+  type PlaylistAddModalType,
+  PlaylistAddModalSchema,
 } from "@/types/index";
 import {
   type Playlist,
   type PlaylistOptionalDefaults,
   PlaylistOptionalDefaultsSchema,
 } from "@/db/prisma/generated/zod/index";
-import { useAuth } from '@/hooks/auth/client';
-import { Button, LoadingButton } from '@/components/ui/button';
+import { useAuth } from "@/hooks/auth/client";
+import { Button, LoadingButton } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/spinner";
 import { getPlaylistAction, createPlaylistAction } from "@/actions/playlist";
 import { createVideoAction } from "@/actions/video";
@@ -33,7 +33,7 @@ export function AddModal({
 }: AddModalProps) {
   // ログインユーザID
   const [userId, setUserId] = useState<string>("");
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   // Refオブジェクトを作成する
   const modalRef = useRef<HTMLDivElement>(null);
@@ -44,14 +44,14 @@ export function AddModal({
       onClose();
     }
   };
-  
+
   useEffect(() => {
-    if(user) {
+    if (user) {
       // ログインユーザIDを設定する
       setUserId(user.id);
     }
-  },[user])
-  
+  }, [user]);
+
   useEffect(() => {
     // モーダルにフォーカスを設定する
     modalRef.current?.focus();
@@ -92,18 +92,20 @@ export function AddModal({
           <div className="p-5">
             <div className="mb-4 pr-2 text-gray-700 truncate">{title}</div>
             <div className="text-center">
-              <PlaylisetSelectBox {...{videoId, title, onClose}} />
+              <PlaylisetSelectBox {...{ videoId, title, onClose }} />
             </div>
           </div>
           <hr className="h-px border-gray-300" />
           <div className="p-5">
             {userId && (
-              <NewPlaylistAddVideoBox {...{videoId, title, onClose, defaultValues : { userId }}} />
+              <NewPlaylistAddVideoBox
+                {...{ videoId, title, onClose, defaultValues: { userId } }}
+              />
             )}
           </div>
           <hr className="h-px border-gray-300" />
           <div className="grid grid-cols-2 gap-4 p-5">
-            <Button 
+            <Button
               type="button"
               onClick={onClose}
               label={cancelText}
@@ -121,13 +123,13 @@ export function AddModal({
 
 // プレリストのセレクトボックスから選択してビデオを追加
 export function PlaylisetSelectBox({
-  videoId, 
-  title, 
-  onClose
+  videoId,
+  title,
+  onClose,
 }: {
-  videoId:string, 
-  title:string,
-  onClose: () => void,
+  videoId: string;
+  title: string;
+  onClose: () => void;
 }) {
   const [playlist, setPlaylist] = useState<Playlist[]>([]);
 
@@ -135,23 +137,25 @@ export function PlaylisetSelectBox({
   const { register, handleSubmit, formState, setError, clearErrors } =
     useForm<PlaylistAddModalType>({
       resolver: zodResolver(PlaylistAddModalSchema),
-  });
+    });
   const { errors, isDirty, isValid, isSubmitting } = formState;
-  
+
   // onSubmitイベントのハンドラー
-  const onSubmit: SubmitHandler<PlaylistAddModalType> = async (data:PlaylistAddModalType) => {
-    const {id} = playlist[data.index];
+  const onSubmit: SubmitHandler<PlaylistAddModalType> = async (
+    data: PlaylistAddModalType,
+  ) => {
+    const { id } = playlist[data.index];
     // サーバアクションを起動
     // プレイリストにビデオを追加
     await createVideoAction({
       videoId,
       title,
       seq: 0,
-      playlistId:id
+      playlistId: id,
     });
     onClose();
   };
-  
+
   useEffect(() => {
     (async () => {
       const playlist = await getPlaylistAction();
@@ -172,14 +176,16 @@ export function PlaylisetSelectBox({
           </option>
         ))}
       </select>
-      <div className="mb-4 text-left text-red-500">{errors.index?.message }</div>
+      <div className="mb-4 text-left text-red-500">{errors.index?.message}</div>
       <div>
-        <LoadingButton 
-          label="登録" 
-          type="submit" 
-          disabled={!isDirty || !isValid || isSubmitting} 
+        <LoadingButton
+          label="登録"
+          type="submit"
+          disabled={!isDirty || !isValid || isSubmitting}
           isProcessing={isSubmitting}
-          color="blue" full />
+          color="blue"
+          full
+        />
       </div>
     </form>
   ) : (
@@ -189,34 +195,36 @@ export function PlaylisetSelectBox({
 
 // 新規プレイリストを作成してビデオを追加
 export function NewPlaylistAddVideoBox({
-  videoId, 
-  title, 
+  videoId,
+  title,
   onClose,
   defaultValues,
 }: {
-  videoId:string, 
-  title:string,
-  onClose: () => void,
+  videoId: string;
+  title: string;
+  onClose: () => void;
   defaultValues: {
     userId: string;
   };
 }) {
   const [open, setOpen] = useState(false);
-  
+
   const handleClick = () => {
     setOpen(true);
   };
-  
+
   // Formの入力パーツの初期化
   const { register, handleSubmit, formState, setError, clearErrors } =
     useForm<PlaylistOptionalDefaults>({
       resolver: zodResolver(PlaylistOptionalDefaultsSchema),
       defaultValues,
-  });
+    });
   const { errors, isDirty, isValid, isSubmitting } = formState;
-  
+
   // onSubmitイベントのハンドラー
-  const onSubmit: SubmitHandler<PlaylistOptionalDefaults> = async (data:PlaylistOptionalDefaults) => {
+  const onSubmit: SubmitHandler<PlaylistOptionalDefaults> = async (
+    data: PlaylistOptionalDefaults,
+  ) => {
     // 送信時にエラー表示を解除
     clearErrors();
     // サーバアクションを起動
@@ -229,16 +237,16 @@ export function NewPlaylistAddVideoBox({
         videoId,
         title,
         seq: 0,
-        playlistId:id
+        playlistId: id,
       });
     }
     onClose();
   };
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4 pl-1">
-        <Button 
+        <Button
           type="button"
           label="新規プレイリスト作成してビデオを追加する"
           onClick={handleClick}
@@ -257,15 +265,19 @@ export function NewPlaylistAddVideoBox({
               register={register}
               formState={formState}
             />
-            <div className="mb-4 text-left text-red-500">{errors.name?.message }</div>
+            <div className="mb-4 text-left text-red-500">
+              {errors.name?.message}
+            </div>
           </div>
           <div>
-            <LoadingButton 
-              label="登録" 
-              type="submit" 
-              disabled={!isDirty || !isValid || isSubmitting} 
+            <LoadingButton
+              label="登録"
+              type="submit"
+              disabled={!isDirty || !isValid || isSubmitting}
               isProcessing={isSubmitting}
-              color="blue" full />
+              color="blue"
+              full
+            />
           </div>
         </div>
       )}
