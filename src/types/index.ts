@@ -1,5 +1,9 @@
 import * as z from "zod";
-import { type Playlist, type Video } from "@/db/prisma/generated/zod/index";
+import {
+  type Playlist,
+  type Video,
+  type PlaylistWithPartialRelations,
+} from "@/db/prisma/generated/zod/index";
 
 export type SignInActionReturnType =
   | undefined
@@ -237,5 +241,5 @@ export type MyImageProps = {
 };
 
 export type PlaylisetItemProps = {
-  item: Playlist;
+  item: PlaylistWithPartialRelations;
 };

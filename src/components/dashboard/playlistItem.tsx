@@ -6,7 +6,7 @@ import { MyImage } from "@/components/common/myImage";
 
 export function PlaylistItem({ item }: PlaylisetItemProps) {
   // 先頭の動画を取り出す
-  const firstVideo = item.video[0];
+  const firstVideo = item.video![0];
   const videoId = firstVideo.videoId;
   // 先頭の動画の画像用URL
   const imageUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
@@ -28,7 +28,7 @@ export function PlaylistItem({ item }: PlaylisetItemProps) {
           </h5>
           <p className="mb-1 text-left font-normal text-gray-700">
             <RiMovieFill className="inline-block mr-2 text-xl" />
-            <span className="align-middle">{item.video.length}件の動画</span>
+            <span className="align-middle">{item.video!.length}件の動画</span>
           </p>
           <p className="text-left font-normal text-gray-700">
             <IoIosTimer className="inline-block mr-2 text-xl" />
