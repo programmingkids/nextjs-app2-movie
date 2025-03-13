@@ -226,3 +226,16 @@ export const PlaylistAddModalSchema = z.object({
 });
 
 export type PlaylistAddModalType = z.infer<typeof PlaylistAddModalSchema>;
+
+export type MyImageProps = {
+  src: string;
+  alt: string;
+  className: string;
+  errorClassName: string;
+  width: number;
+  height: number;
+};
+
+export type PlaylisetItemProps = {
+  item: Playlist;
+};

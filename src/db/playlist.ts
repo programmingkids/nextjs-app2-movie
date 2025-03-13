@@ -128,15 +128,11 @@ export async function getPlaylistForPlay(userId: string) {
         some: {},
       },
     },
+    include: {
+      video: true,
+    },
     orderBy: {
       id: "asc",
-    },
-    include: {
-      _count: {
-        select: {
-          video: true,
-        },
-      },
     },
   });
   return result;
