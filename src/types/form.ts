@@ -18,3 +18,11 @@ export type PasswordInputProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
   formState: FormState<T>;
 };
+
+// labelのみをオプショナルにする
+type Optional<T extends FieldValues, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
+export type TextInputNoLabelProps<T extends FieldValues> = Optional<
+  TextInputProps<T>,
+  "label"
+>;

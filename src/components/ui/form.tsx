@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { FieldValues } from "react-hook-form";
-import { type TextInputProps, type PasswordInputProps } from "@/types/form";
+import { type TextInputProps, type PasswordInputProps, type TextInputNoLabelProps} from "@/types/form";
 
 const theme = {
   input: {
@@ -110,5 +110,47 @@ export function PassworInput<T extends FieldValues>({
       </button>
       {error && <p className={helpClass}>{error}</p>}
     </div>
+  );
+}
+
+export function TextInputNoLabel<T extends FieldValues>({
+  label,
+  name,
+  placeholder,
+  type,
+  error,
+  register,
+  formState,
+}: TextInputNoLabelProps<T>) {
+  const { submitCount } = formState;
+
+  let color: "default" | "success" | "failure" = "default";
+  if (submitCount === 0) {
+    color = "default";
+  } else if (error !== undefined) {
+    color = "failure";
+  } else {
+    color = "success";
+  }
+  const labelClass = theme.label[color];
+  const inputClass = theme.input[color];
+  const helpClass = theme.help[color];
+
+  return (
+    <>
+      {label && (
+        <label htmlFor={name} className={labelClass}>
+          {label}
+        </label>
+      )}
+      <input
+        type={type}
+        id={name}
+        placeholder={placeholder}
+        className={inputClass}
+        {...register(name)}
+      />
+      {error && <p className={helpClass}>{error}</p>}
+    </>
   );
 }
