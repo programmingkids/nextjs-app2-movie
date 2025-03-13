@@ -252,6 +252,7 @@ export function NewPlaylistAddVideoBox({
           onClick={handleClick}
           size="small"
           color="teal"
+          className="rounded-full px-6"
         />
       </div>
       {open && (
