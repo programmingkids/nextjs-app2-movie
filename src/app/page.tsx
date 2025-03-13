@@ -4,6 +4,7 @@ import Image from "next/image";
 import { APPNAME } from "@/config/data";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { ButtonLink } from "@/components/ui/link";
 
 export const metadata: Metadata = {
   title: `Home | ${APPNAME}`,
@@ -14,20 +15,10 @@ export default function Home() {
     <>
       <Header />
       <div className="mt-16 mb-16">
-        <h1 className="p-5 bg-orange-500 text-center text-white text-2xl font-semibold">
-          PLAYLIST
-        </h1>
-        <ul className="text-center m-4">
-          <li className="m-5">
-            <Link href="/signin" className="text-blue-500 underline m-4">
-              Signin
-            </Link>
-          </li>
-          <li>
-            <Link href="/signup" className="text-blue-500 underline m-4">
-              Signup
-            </Link>
-          </li>
+        <h1 className="p-5 text-center text-2xl font-semibold">動画アプリ</h1>
+        <ul className="flex justify-center gap-10 mt-10">
+          <ButtonLink text="Signin" href="/signin" color="teal" size="large" />
+          <ButtonLink text="Signup" href="/signup" color="teal" size="large" />
         </ul>
       </div>
       <Footer />
