@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { type BreadcrumbList } from "@/types/index";
 import { Breadcrumb } from "@/components/common/breadcrumb";
 import { getAuth } from "@/hooks/auth/server";
-import { Playlist } from '@/components/dashboard/playlist';
+import { Playlist } from "@/components/dashboard/playlist";
 
 export const metadata: Metadata = {
   title: "ダッシュボード",

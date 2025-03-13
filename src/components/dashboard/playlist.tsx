@@ -1,7 +1,7 @@
 import { type Playlist } from "@/db/prisma/generated/zod/index";
 import { getPlaylistForPlay } from "@/db/playlist";
 import { getAuth } from "@/hooks/auth/server";
-import { PlaylistItem } from '@/components/dashboard/playlistItem';
+import { PlaylistItem } from "@/components/dashboard/playlistItem";
 
 export async function Playlist() {
   const {
