@@ -1,4 +1,4 @@
-//import { GoogleBook, GetBookByIdReturn } from "@/types/index";
+import { type YoutubeVideoItem } from "@/types/index";
 
 // Youtube Data API v3 URL
 const APIURL = "https://www.googleapis.com/youtube/v3";
@@ -39,10 +39,12 @@ export async function getMovieByKeyword(
   if (totalResults <= 0 || !items) {
     return errorData;
   }
-  //console.dir(items, { depth: null });
+  // console.dir(items, { depth: null });
 
   return {
-    items,
+    items: items.filter(
+      (item: YoutubeVideoItem) => item.id.kind !== "youtube#channel",
+    ),
     nextPageToken,
     resultsPerPage,
     totalResults,
