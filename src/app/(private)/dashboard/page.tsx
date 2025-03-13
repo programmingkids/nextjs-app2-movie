@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { type BreadcrumbList } from "@/types/index";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { getAuth } from "@/hooks/auth/server";
+import { Playliset } from '@/components/dashboard/playlist';
 
 export const metadata: Metadata = {
   title: "ダッシュボード",
 };
+
+const bcList: BreadcrumbList = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    current: true,
+    home: true,
+  },
+];
 
 export default async function Page() {
   const { userName, email, avatarUrl } = await getAuth();
@@ -12,11 +23,13 @@ export default async function Page() {
   return (
     <div>
       <h1 className="p-4 text-center text-lg bg-blue-500 text-white">
-        ダッシュボード
+        ダッシュボード / プレイリスト
       </h1>
-      <div className="mx-auto w-80 text-left m-4">
-        <div>name: {userName}</div>
-        <div>email: {email}</div>
+      <div className="my-4 px-6">
+        <Breadcrumb {...{ bcList }} />
+      </div>
+      <div className="my-4 px-6">
+        <Playliset />
       </div>
     </div>
   );

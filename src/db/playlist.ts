@@ -118,3 +118,26 @@ export async function deletePlaylistById(id: number) {
     };
   }
 }
+
+export async function getPlaylistForPlay(userId: string) {
+  // ユーザIDで検索
+  const result = await prisma.playlist.findMany({
+    where: {
+      userId,
+      video: {
+        some: {},
+      },
+    },
+    orderBy: {
+      id: "asc",
+    },
+    include: {
+      _count: {
+        select: {
+          video: true,
+        },
+      },
+    },
+  });
+  return result;
+}
