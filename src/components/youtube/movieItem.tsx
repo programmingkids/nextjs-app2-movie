@@ -13,11 +13,7 @@ import { MyImage } from "@/components/common/myImage";
 export function MovieItem({
   item: {
     id: { videoId },
-    snippet: {
-      publishedAt,
-      channelTitle,
-      title,
-    },
+    snippet: { publishedAt, channelTitle, title },
   },
 }: MovieItemProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -35,8 +31,8 @@ export function MovieItem({
 
   useEffect(() => {
     setDate(new Date(publishedAt));
-  }, []);
-  
+  }, [publishedAt]);
+
   return (
     <Link
       href={`/watch/${videoId}`}

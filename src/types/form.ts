@@ -1,5 +1,10 @@
 import { UseFormRegister, FieldValues, Path, FormState } from "react-hook-form";
 
+export type InputColorStyle = "default" | "success" | "failure";
+export type Size = "small" | "base" | "large";
+export type Full = "full" | "base";
+
+// テキストボックス
 export type TextInputProps<T extends FieldValues> = {
   label: string;
   name: Path<T>;
@@ -10,6 +15,7 @@ export type TextInputProps<T extends FieldValues> = {
   formState: FormState<T>;
 };
 
+// パスワードテキストボックス
 export type PasswordInputProps<T extends FieldValues> = {
   label: string;
   name: Path<T>;
@@ -26,3 +32,22 @@ export type TextInputNoLabelProps<T extends FieldValues> = Optional<
   TextInputProps<T>,
   "label"
 >;
+
+export type InputStyleArgsType = {
+  color?: InputColorStyle;
+  size?: Size;
+  full?: boolean;
+  className?: string;
+};
+
+export type LabelStyleArgsType = {
+  color?: InputColorStyle;
+  size?: Size;
+  className?: string;
+};
+
+export type HelpStyleArgsType = {
+  color?: InputColorStyle;
+  size?: Size;
+  className?: string;
+};

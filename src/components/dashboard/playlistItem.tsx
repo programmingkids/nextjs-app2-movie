@@ -28,7 +28,7 @@ export function PlaylistItem({ item }: PlaylisetItemProps) {
 
   useEffect(() => {
     setDate(item.createdAt);
-  }, []);
+  }, [item]);
 
   return (
     <Link

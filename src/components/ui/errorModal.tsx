@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { FaTriangleExclamation } from "react-icons/fa6";
-import { ErrorModalProps } from "@/types/index";
+import { type ErrorModalProps } from "@/types/index";
 
 export function ErrorModal({
   mainText,

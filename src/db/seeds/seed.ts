@@ -1,5 +1,5 @@
 import prisma from "@/db/prisma";
-import data from "@/db/seeds/seedData";
+//import data from "@/db/seeds/seedData";
 
 async function main() {}
 

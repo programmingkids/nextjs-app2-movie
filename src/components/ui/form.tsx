@@ -5,28 +5,13 @@ import {
   type TextInputProps,
   type PasswordInputProps,
   type TextInputNoLabelProps,
+  type InputColorStyle,
 } from "@/types/form";
-
-const theme = {
-  input: {
-    default:
-      "block rounded-lg p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 outline-none focus:ring-blue-500 focus:border-blue-500",
-    success:
-      "block rounded-lg p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-green-300 outline-none focus:ring-blue-500 focus:border-blue-500",
-    failure:
-      "block rounded-lg p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-red-300 outline-none focus:ring-blue-500 focus:border-blue-500",
-  },
-  label: {
-    default: "block mb-2 text-md text-gray-600 peer-focus:text-blue-600",
-    success: "block mb-2 text-md text-green-600 peer-focus:text-blue-600",
-    failure: "block mb-2 text-md text-red-600 peer-focus:text-blue-600",
-  },
-  help: {
-    default: "mt-2 text-sm text-gray-600",
-    success: "mt-2 text-sm text-green-600",
-    failure: "mt-2 text-sm text-red-600",
-  },
-};
+import {
+  generateInputStyle,
+  generateLabelStyle,
+  generateHelpStyle,
+} from "@/components/ui/formStyle";
 
 export function TextInput<T extends FieldValues>({
   label,
@@ -38,8 +23,7 @@ export function TextInput<T extends FieldValues>({
   formState,
 }: TextInputProps<T>) {
   const { submitCount } = formState;
-
-  let color: "default" | "success" | "failure" = "default";
+  let color: InputColorStyle = "default";
   if (submitCount === 0) {
     color = "default";
   } else if (error !== undefined) {
@@ -47,23 +31,24 @@ export function TextInput<T extends FieldValues>({
   } else {
     color = "success";
   }
-  const labelClass = theme.label[color];
-  const inputClass = theme.input[color];
-  const helpClass = theme.help[color];
+
+  const inputCn = generateInputStyle({ color, full: true });
+  const labelCn = generateLabelStyle({ color });
+  const helpCn = generateHelpStyle({ color });
 
   return (
     <>
-      <label htmlFor={name} className={labelClass}>
+      <label htmlFor={name} className={labelCn}>
         {label}
       </label>
       <input
         type={type}
         id={name}
         placeholder={placeholder}
-        className={inputClass}
+        className={inputCn}
         {...register(name)}
       />
-      {error && <p className={helpClass}>{error}</p>}
+      {error && <p className={helpCn}>{error}</p>}
     </>
   );
 }
@@ -89,20 +74,20 @@ export function PassworInput<T extends FieldValues>({
     color = "success";
   }
 
-  const inputClass = theme.input[color];
-  const labelClass = theme.label[color];
-  const helpClass = theme.help[color];
+  const inputCn = generateInputStyle({ color, full: true });
+  const labelCn = generateLabelStyle({ color });
+  const helpCn = generateHelpStyle({ color });
 
   return (
     <div className="relative">
-      <label htmlFor={name} className={labelClass}>
+      <label htmlFor={name} className={labelCn}>
         {label}
       </label>
       <input
         id={name}
         type={visible ? "text" : "password"}
         placeholder={placeholder}
-        className={inputClass}
+        className={inputCn}
         {...register(name)}
       />
       <button
@@ -112,7 +97,7 @@ export function PassworInput<T extends FieldValues>({
       >
         {visible ? <HiEye size="1.5em" /> : <HiEyeOff size="1.5em" />}
       </button>
-      {error && <p className={helpClass}>{error}</p>}
+      {error && <p className={helpCn}>{error}</p>}
     </div>
   );
 }
@@ -136,14 +121,15 @@ export function TextInputNoLabel<T extends FieldValues>({
   } else {
     color = "success";
   }
-  const labelClass = theme.label[color];
-  const inputClass = theme.input[color];
-  const helpClass = theme.help[color];
+
+  const inputCn = generateInputStyle({ color, full: true });
+  const labelCn = generateLabelStyle({ color });
+  const helpCn = generateHelpStyle({ color });
 
   return (
     <>
       {label && (
-        <label htmlFor={name} className={labelClass}>
+        <label htmlFor={name} className={labelCn}>
           {label}
         </label>
       )}
@@ -151,10 +137,10 @@ export function TextInputNoLabel<T extends FieldValues>({
         type={type}
         id={name}
         placeholder={placeholder}
-        className={inputClass}
+        className={inputCn}
         {...register(name)}
       />
-      {error && <p className={helpClass}>{error}</p>}
+      {error && <p className={helpCn}>{error}</p>}
     </>
   );
 }

@@ -3,7 +3,7 @@ import { MdSearch } from "react-icons/md";
 import { type SearchPageProps } from "@/types/page";
 import { getMovieByKeyword } from "@/lib/youtube";
 import { MovieList } from "@/components/youtube/movieList";
-import { items, totalResults} from "@/config/dammyItems";
+import { items, totalResults } from "@/config/dammyItems";
 
 export const metadata: Metadata = {
   title: "Search",

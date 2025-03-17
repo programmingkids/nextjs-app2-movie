@@ -56,7 +56,7 @@ export default async function Page({ params }: SearchPageProps) {
   ];
   //console.log(videoList);
   */
-  
+
   return (
     <>
       {videoId == "" ? (

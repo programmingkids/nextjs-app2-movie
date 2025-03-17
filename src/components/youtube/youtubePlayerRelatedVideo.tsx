@@ -23,7 +23,7 @@ export function YoutubePlayerRelatedVideo({
         src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
         width={320}
         height={180}
-        alt={`thumbname ${videoId}`}
+        alt={`thumbnail ${videoId}`}
         className={imageStyle}
         onClick={handleClickToPlay}
       />
