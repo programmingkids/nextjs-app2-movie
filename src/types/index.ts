@@ -81,13 +81,13 @@ export type YoutubeVideoItem = {
     thumbnails: {
       default: {
         url: string;
-        width: string;
-        height: string;
+        width: number;
+        height: number;
       };
       medium: {
         url: string;
-        width: string;
-        height: string;
+        width: number;
+        height: number;
       };
       high: {
         url: string;
@@ -95,7 +95,7 @@ export type YoutubeVideoItem = {
         height: number;
       };
     };
-    tags: string[];
+    tags?: string[];
     channelTitle: string;
     liveBroadcastContent: string;
     publishTime: string;
