@@ -3,6 +3,7 @@ import {
   type VideoOptionalDefaults,
   type Video,
 } from "@/db/prisma/generated/zod/index";
+import { type VideoReturnType } from "@/types/db";
 
 export async function getVideos() {
   // 全件取得
@@ -26,15 +27,6 @@ export async function getVideosByPlaylistId(playlistId: number) {
   });
   return result;
 }
-
-type VideoReturnType =
-  | {
-      success: true;
-      data: Video;
-    }
-  | {
-      success: false;
-    };
 
 export async function getVideoById(id: number): Promise<VideoReturnType> {
   // 1件を取得

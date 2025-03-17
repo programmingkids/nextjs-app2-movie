@@ -11,19 +11,19 @@ import { createClient } from "@/utils/supabase/server";
 const HOST = process.env.HOST;
 
 export async function getAuth() {
-  // Server Side Client
+  // サーバーコンポーネント用接続
   const supabase = await createClient();
-  // get User
+  // ユーザ取得
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // not auth, goto signin
+  // 未認証
   if (!user) {
     redirect(PAGE_SIGNIN);
   }
 
-  // signout action
+  // サインアウト関数
   const signOut = async () => {
     await supabase.auth.signOut();
     redirect(PAGE_AFTER_LOGOUT);
@@ -43,22 +43,22 @@ export async function getAuth() {
 }
 
 export async function getAuthSign() {
-  // Server Side Client
+  // サーバーコンポーネント用接続
   const supabase = await createClient();
 
-  // singup action
+  // ユーザ登録関数
   const signUp = async (data: AuthSignData) => {
     const { error } = await supabase.auth.signUp(data);
     return { error };
   };
 
-  // email&password singin action
+  // サインイン関数
   const signIn = async (data: AuthSignData) => {
     const { error } = await supabase.auth.signInWithPassword(data);
     return { error };
   };
 
-  // google oauth signin action
+  // Google認証関数
   const signInWithOAuth = async () => {
     const {
       data: { url },
@@ -76,7 +76,7 @@ export async function getAuthSign() {
     redirect(url as string);
   };
 
-  // update password action
+  // パスワード更新関数
   const updatePassword = async (password: string) => {
     const { error } = await supabase.auth.updateUser({
       password: password,
@@ -84,6 +84,7 @@ export async function getAuthSign() {
     return { error };
   };
 
+  // ユーザ名更新関数
   const updateUserName = async (fullName: string) => {
     const { error } = await supabase.auth.updateUser({
       data: { full_name: fullName },
@@ -101,9 +102,10 @@ export async function getAuthSign() {
 }
 
 export async function isAuth() {
-  // Server Side Client
+  // サーバーコンポーネント用接続
   const supabase = await createClient();
 
+  // 認証可否を判定する
   const {
     data: { user },
   } = await supabase.auth.getUser();

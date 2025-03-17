@@ -22,6 +22,7 @@ export const sequential = <T>(promises: (() => Promise<T>)[]): Promise<T[]> => {
   );
 };
 
+// HTMLエンティティを文字列に変換する
 export function htmlDecode(input: string): string {
   return decodeHTML(input);
 }

@@ -6,12 +6,12 @@ import { createClient } from "@/utils/supabase/client";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>();
-  // Client Side Client
+  // クライアントコンポーネント用接続
   const supabase = createClient();
 
   useEffect(() => {
     (async () => {
-      // get User
+      // ユーザ取得
       const {
         data: { user },
       } = await supabase.auth.getUser();

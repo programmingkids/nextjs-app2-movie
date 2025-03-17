@@ -3,6 +3,7 @@ import {
   type PlaylistOptionalDefaults,
   type Playlist,
 } from "@/db/prisma/generated/zod/index";
+import { type PlaylistReturnType } from "@/types/db";
 
 export async function getPlaylists() {
   // 全件取得
@@ -26,15 +27,6 @@ export async function getPlaylistByUserId(userId: string) {
   });
   return result;
 }
-
-type PlaylistReturnType =
-  | {
-      success: true;
-      data: Playlist;
-    }
-  | {
-      success: false;
-    };
 
 export async function getPlaylistById(
   id: number,
