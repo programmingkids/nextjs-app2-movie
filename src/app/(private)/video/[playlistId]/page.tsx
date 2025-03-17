@@ -12,7 +12,7 @@ import { getVideosByPlaylistId } from "@/db/video";
 import { Table } from "@/components/video/table";
 
 export const metadata: Metadata = {
-  title: "Playlist",
+  title: "ビデオ | 一覧",
 };
 
 export default async function Page({ params }: VideoListPageProps) {

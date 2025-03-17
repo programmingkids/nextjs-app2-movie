@@ -10,7 +10,7 @@ import { VideoEditForm } from "@/components/video/edtForm";
 import { getAuth } from "@/hooks/auth/server";
 
 export const metadata: Metadata = {
-  title: "Video Edit",
+  title: "ビデオ | 編集",
 };
 
 export default async function Page({ params }: VideoEditPageProps) {

@@ -1,6 +1,11 @@
 import { AuthUser } from "@/types/auth";
 import { YoutubeVideoItem } from "@/types/index";
 
+export type GlobalErrorProps = {
+  error: Error;
+  reset: () => void;
+};
+
 export type PageProps = {
   children: React.ReactNode;
 };

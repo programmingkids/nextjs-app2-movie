@@ -18,10 +18,10 @@ export async function GET(request: NextRequest) {
       token_hash,
     });
     if (!error) {
-      // success, go to dashboard
+      // 成功、ダッシュボードへ移動
       redirect(next);
     }
   }
-  // error, got to mail-error
+  // エラー
   redirect(MAIL_ERROR);
 }

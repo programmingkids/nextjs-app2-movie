@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { RiMovieFill } from "react-icons/ri";
 import { IoIosTimer } from "react-icons/io";
 import { FaPlay } from "react-icons/fa6";

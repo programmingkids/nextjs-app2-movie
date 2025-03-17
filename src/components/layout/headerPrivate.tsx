@@ -3,18 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { FaUser, FaAlignJustify } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { APPNAME, PAGE_AFTER_LOGIN } from "@/config/data";
 import { useAuthUser } from "@/hooks/auth/authUser";
 import { Signout } from "@/components/auth/signout";
 import { SearchBox } from "@/components/common/searchBox";
-
-// const links = [
-//   { title: "ダッシュボード", href: "/dashboard" },
-//   { title: "紹介", href: "/about" },
-// ];
 
 const avatarLinks = [
   { title: "ダッシュボード", href: "/dashboard" },
@@ -23,9 +17,7 @@ const avatarLinks = [
 ];
 
 export function Header() {
-  const [toggle, setToggle] = useState(false);
   const [userToggle, setUserToggle] = useState(false);
-  const pathName = usePathname();
   const {
     authUser: { avatarUrl, email, userName },
   } = useAuthUser();

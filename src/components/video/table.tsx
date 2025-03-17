@@ -23,14 +23,11 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { type Video } from "@/db/prisma/generated/zod/index";
+import { type VideoTableProps } from '@/types/index';
 import { Delete } from "@/components/video/delete";
 import { reorderVideoAction } from "@/actions/video";
 
-type Props = {
-  list: Video[];
-};
-
-export function Table({ list }: Props) {
+export function Table({ list }: VideoTableProps) {
   const id = useId();
   const [items, setItems] = useState<Video[]>(list);
   const sensors = useSensors(

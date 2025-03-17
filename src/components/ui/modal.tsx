@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { FaCircleInfo } from "react-icons/fa6";
-import { SuccessModalProps } from "@/types/index";
+import { type SuccessModalProps } from "@/types/index";
 
 export function SuccessModal({
   mainText,

@@ -9,7 +9,7 @@ import { getPlaylistByUserId } from "@/db/playlist";
 import { Table } from "@/components/playlist/table";
 
 export const metadata: Metadata = {
-  title: "Playlist",
+  title: "プレイリスト | 一覧",
 };
 
 const bcList: BreadcrumbList = [

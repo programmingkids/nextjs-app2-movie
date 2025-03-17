@@ -9,7 +9,7 @@ import { getPlaylistById } from "@/db/playlist";
 import { PlaylistEditForm } from "@/components/playlist/edtForm";
 
 export const metadata: Metadata = {
-  title: "Playlist Edit",
+  title: "プレイリスト | 編集",
 };
 
 export default async function Page({ params }: PlaylisteEditPageProps) {

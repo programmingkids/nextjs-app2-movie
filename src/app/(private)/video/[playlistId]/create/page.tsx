@@ -9,7 +9,7 @@ import { VideoCreateForm } from "@/components/video/createForm";
 import { getAuth } from "@/hooks/auth/server";
 
 export const metadata: Metadata = {
-  title: "Video Create",
+  title: "ビデオ | 新規作成",
 };
 
 export default async function Page({ params }: VideoCreatePageProps) {

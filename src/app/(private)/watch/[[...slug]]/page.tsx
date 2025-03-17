@@ -11,7 +11,7 @@ import { YoutubePlayerController } from "@/components/youtube/youtubePlayerContr
 import { videoList } from "@/config/dammyVideoList";
 
 export const metadata: Metadata = {
-  title: "Watch",
+  title: "動画再生",
 };
 
 export default async function Page({ params }: SearchPageProps) {

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 import { APPNAME } from "@/config/data";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";

@@ -6,7 +6,7 @@ import { MovieList } from "@/components/youtube/movieList";
 import { items, totalResults } from "@/config/dammyItems";
 
 export const metadata: Metadata = {
-  title: "Search",
+  title: "検索",
 };
 
 export default async function Page({ params }: SearchPageProps) {

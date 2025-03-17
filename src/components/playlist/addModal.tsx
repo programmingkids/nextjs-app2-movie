@@ -6,15 +6,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HiOutlineXMark } from "react-icons/hi2";
 import {
-  type AddModalProps,
-  type PlaylistAddModalType,
-  PlaylistAddModalSchema,
-} from "@/types/index";
-import {
   type Playlist,
   type PlaylistOptionalDefaults,
   PlaylistOptionalDefaultsSchema,
 } from "@/db/prisma/generated/zod/index";
+import {
+  type AddModalProps,
+  type PlaylistAddModalType,
+  PlaylistAddModalSchema,
+} from "@/types/index";
 import { useAuth } from "@/hooks/auth/client";
 import { Button, LoadingButton } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/spinner";

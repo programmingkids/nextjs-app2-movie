@@ -6,7 +6,7 @@ import { PlaylistCreateForm } from "@/components/playlist/createForm";
 import { getAuth } from "@/hooks/auth/server";
 
 export const metadata: Metadata = {
-  title: "Playlist Create",
+  title: "プレイリスト | 新規作成",
 };
 
 const bcList: BreadcrumbList = [

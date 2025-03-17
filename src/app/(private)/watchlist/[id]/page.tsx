@@ -4,7 +4,7 @@ import { getVideosByPlaylistId } from "@/db/video";
 import { YoutubePlayerController } from "@/components/youtube/youtubePlayerController";
 
 export const metadata: Metadata = {
-  title: "Watch Playlist",
+  title: "プレイリスト再生",
 };
 
 export default async function Page({ params }: WatchlistPageProps) {

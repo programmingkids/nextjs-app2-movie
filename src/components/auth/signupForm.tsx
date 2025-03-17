@@ -20,7 +20,6 @@ export function SignupForm() {
     clearErrors();
     // サーバアクションを起動
     const result = await signUpAction(data);
-    console.log(result);
     if (result && !result.success) {
       // サーバー側バリデーション失敗なら、エラーを表示する
       Object.entries(result.error!).map(([key, value]) => {

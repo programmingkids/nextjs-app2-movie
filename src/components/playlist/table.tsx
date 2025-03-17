@@ -3,13 +3,10 @@ import { HiPencil } from "react-icons/hi2";
 import { PiPlaylistBold } from "react-icons/pi";
 import { FaCirclePlay } from "react-icons/fa6";
 import { type Playlist } from "@/db/prisma/generated/zod/index";
+import { type PlaylisetTableProps } from "@/types/index";
 import { Delete } from "@/components/playlist/delete";
 
-type Props = {
-  list: Playlist[];
-};
-
-export function Table({ list }: Props) {
+export function Table({ list }: PlaylisetTableProps) {
   return (
     <div className="relative overflow-x-auto shadow-md rounded-lg">
       <table className="w-full text-left">

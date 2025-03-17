@@ -243,3 +243,11 @@ export type MyImageProps = {
 export type PlaylisetItemProps = {
   item: PlaylistWithPartialRelations;
 };
+
+export type PlaylisetTableProps = {
+  list: Playlist[];
+};
+
+export type VideoTableProps = {
+  list: Video[];
+};
