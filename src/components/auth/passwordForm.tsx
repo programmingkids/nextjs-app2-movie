@@ -73,7 +73,7 @@ export const PasswordUpdateForm = () => {
               full={true}
               color="blue"
               isProcessing={isSubmitting}
-              disabled={!isDirty || !isValid}
+              disabled={!isDirty || !isValid || isSubmitting}
             />
           </form>
         </div>

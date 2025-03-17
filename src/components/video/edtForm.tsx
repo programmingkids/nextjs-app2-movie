@@ -83,7 +83,7 @@ export function VideoEditForm({ defaultValues }: VideoEditFormProps) {
           full={true}
           color="blue"
           isProcessing={isSubmitting}
-          disabled={!isDirty || !isValid}
+          disabled={!isDirty || !isValid || isSubmitting}
         />
       </form>
       {showModal && (

@@ -8,7 +8,7 @@ import {
 } from "@/types/index";
 import { getMovieByVideoId, getMovieByKeyword } from "@/lib/youtube";
 import { YoutubePlayerController } from "@/components/youtube/youtubePlayerController";
-import { videoList } from "@/config/dammy";
+//import { videoList } from "@/config/dammy";
 
 export const metadata: Metadata = {
   title: "Watch",
@@ -18,7 +18,7 @@ export default async function Page({ params }: SearchPageProps) {
   // /watch/{videoId}
   const { slug } = await params;
   const [videoId = ""] = slug || [];
-  /*
+  
   // VideoIdでAPI検索
   const { items } = await getMovieByVideoId(videoId);
   //console.dir(items, { depth: null });
@@ -55,7 +55,7 @@ export default async function Page({ params }: SearchPageProps) {
       .filter((v: YoutubePlayerVideo) => v.videoId !== mainItem["videoId"]),
   ];
   //console.log(videoList);
-  */
+  
   return (
     <>
       {videoId == "" ? (

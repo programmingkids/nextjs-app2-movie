@@ -129,7 +129,11 @@ export async function getPlaylistForPlay(userId: string) {
       },
     },
     include: {
-      video: true,
+      video: {
+        orderBy: {
+          seq: "asc",
+        },
+      },
     },
     orderBy: {
       id: "asc",

@@ -88,7 +88,7 @@ export function VideoCreateForm({ defaultValues }: VideoCreateFormProps) {
           full={true}
           color="blue"
           isProcessing={isSubmitting}
-          disabled={!isDirty || !isValid}
+          disabled={!isDirty || !isValid || isSubmitting}
         />
       </form>
       {showModal && (

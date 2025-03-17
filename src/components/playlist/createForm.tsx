@@ -77,7 +77,7 @@ export function PlaylistCreateForm({ defaultValues }: PlaylistCreateFormProps) {
           full={true}
           color="blue"
           isProcessing={isSubmitting}
-          disabled={!isDirty || !isValid}
+          disabled={!isDirty || !isValid || isSubmitting}
         />
       </form>
       {showModal && (
