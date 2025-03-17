@@ -15,7 +15,7 @@ export default async function Page({ params }: WatchlistPageProps) {
   const playlistId = parseInt(id as string, 10);
 
   const videoList = await getVideosByPlaylistId(playlistId);
-  //console.log(videoList);
+  //console.dir(videoList, {depth:null});
 
   return (
     <>
