@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { IoIosTimer } from "react-icons/io";
 import { RiMovieFill } from "react-icons/ri";
@@ -10,6 +10,7 @@ import { MyImage } from "@/components/common/myImage";
 
 export function PlaylistItem({ item }: PlaylisetItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [date, setDate] = useState<Date>();
 
   // 先頭の動画を取り出す
   const firstVideo = item.video![0];
@@ -24,6 +25,10 @@ export function PlaylistItem({ item }: PlaylisetItemProps) {
   const handleMouseExit = (e: React.MouseEvent<HTMLAnchorElement>) => {
     setIsHovered(false);
   };
+
+  useEffect(() => {
+    setDate(item.createdAt);
+  }, []);
 
   return (
     <Link
@@ -58,7 +63,7 @@ export function PlaylistItem({ item }: PlaylisetItemProps) {
           <p className="text-left font-normal text-gray-700">
             <IoIosTimer className="inline-block mr-2 text-xl" />
             <span className="align-middle">
-              {new Date(item.createdAt).toLocaleString("ja-JP")}
+              {date && date.toLocaleString("ja-JP")}
             </span>
           </p>
         </div>
