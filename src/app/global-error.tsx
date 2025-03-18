@@ -1,6 +1,6 @@
 "use client";
 
-import { type GlobalErrorProps } from '@/types/page';
+import { type GlobalErrorProps } from "@/types/page";
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   return (

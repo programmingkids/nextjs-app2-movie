@@ -23,7 +23,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { type Video } from "@/db/prisma/generated/zod/index";
-import { type VideoTableProps } from '@/types/index';
+import { type VideoTableProps } from "@/types/index";
 import { Delete } from "@/components/video/delete";
 import { reorderVideoAction } from "@/actions/video";
 
