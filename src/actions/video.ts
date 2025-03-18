@@ -16,10 +16,10 @@ import {
 
 // 新規登録処理を行うサーバーアクション関数
 export async function createVideoAction(data: VideoOptionalDefaults) {
-  // Zodによるバリデーションを実行する
+  // Zodのバリデーション
   const result = VideoOptionalDefaultsSchema.safeParse(data);
 
-  // バリデーション失敗の場合、errorを返す
+  // バリデーション失敗
   if (!result.success) {
     return {
       success: result.success,
@@ -37,10 +37,10 @@ export async function createVideoAction(data: VideoOptionalDefaults) {
 
 // 更新処理を行うサーバーアクション関数
 export async function editVideoAction(data: Video) {
-  // Zodによるバリデーションを実行する
+  // Zodのバリデーション
   const result = VideoSchema.safeParse(data);
 
-  // バリデーション失敗の場合、errorを返す
+  // バリデーション失敗
   if (!result.success) {
     return {
       success: result.success,

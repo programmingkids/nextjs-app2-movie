@@ -17,10 +17,10 @@ import { getAuth } from "@/hooks/auth/server";
 
 // 新規登録処理を行うサーバーアクション関数
 export async function createPlaylistAction(data: PlaylistOptionalDefaults) {
-  // Zodによるバリデーションを実行する
+  // Zodのバリデーション
   const result = PlaylistOptionalDefaultsSchema.safeParse(data);
 
-  // バリデーション失敗の場合、errorを返す
+  // バリデーション失敗
   if (!result.success) {
     return {
       success: result.success,
@@ -38,10 +38,10 @@ export async function createPlaylistAction(data: PlaylistOptionalDefaults) {
 
 // 更新処理を行うサーバーアクション関数
 export async function editPlaylistAction(data: Playlist) {
-  // Zodによるバリデーションを実行する
+  // Zodのバリデーション
   const result = PlaylistSchema.safeParse(data);
 
-  // バリデーション失敗の場合、errorを返す
+  // バリデーション失敗
   if (!result.success) {
     return {
       success: result.success,

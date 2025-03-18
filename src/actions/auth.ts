@@ -48,20 +48,21 @@ const profileUpdateErrorMessage: { [key: string]: string } = {
 export async function signInAction(
   data: SigninFormType,
 ): Promise<SignInActionReturnType> {
-  // zod validate
+  // ZODでのバリデーション
   const result = SigninFormSchema.safeParse(data);
   if (!result.success) {
-    // validate error
+    // バリデーションエラー
     return {
       success: result.success,
       error: result.error.flatten().fieldErrors,
     };
   }
 
-  // sigin
+  // サインイン
   const { signIn } = await getAuthSign();
   const { error } = await signIn(data);
 
+  // サインイン失敗
   if (error) {
     const errorInfo: { email?: [string]; password?: [string] } = {};
     const errorCode = error.code ?? "unknown";
@@ -87,21 +88,21 @@ export async function signInAction(
 export async function signUpAction(
   data: SignupFormType,
 ): Promise<SignUpActionReturnType> {
-  // zod validate
+  // ZODでのバリデーション
   const result = SignupFormSchema.safeParse(data);
   if (!result.success) {
-    // validate error
+    // バリデーションエラー
     return {
       success: result.success,
       error: result.error.flatten().fieldErrors,
     };
   }
 
-  // signup
+  // サインアップ
   const { signUp } = await getAuthSign();
   const { error } = await signUp(data);
 
-  // failed to singup
+  // サインアップ失敗
   if (error) {
     const errorInfo: { email?: [string]; password?: [string] } = {};
     const errorCode = error.code ?? "unknown";
@@ -117,25 +118,21 @@ export async function signUpAction(
       error: errorInfo,
     };
   }
-  // succeeded to signup
+
   revalidatePath(PAGE_AFTER_LOGIN, "layout");
   redirect(PAGE_AFTER_LOGIN);
-  // if confirmation mail is sent
-  // return {
-  //   success: true,
-  // };
 }
 
 // ログアウト用サーバーアクション
 export async function SignoutAction() {
-  // signout
+  // ログアウト
   const { signOut } = await getAuth();
   await signOut();
 }
 
 // Google認証用サーバーアクション
 export async function SignInWithOAuthAction() {
-  // signin by google auth
+  // Googleサインイン
   const { signInWithOAuth } = await getAuthSign();
   await signInWithOAuth();
 }
@@ -144,19 +141,20 @@ export async function SignInWithOAuthAction() {
 export async function updatePasswordAction(
   data: UpdatePasswordFormType,
 ): Promise<PasswordUpteActionReturnType> {
-  // zod validate
+  // ZODでのバリデーション
   const result = UpdatePasswordFormSchema.safeParse(data);
   if (!result.success) {
-    // validate error
+    // バリデーションエラー
     return {
       success: result.success,
       error: result.error.flatten().fieldErrors,
     };
   }
-  // update
+  // パスワード更新
   const { updatePassword } = await getAuthSign();
   const { error } = await updatePassword(data.password);
 
+  // パスワード更新失敗
   if (error) {
     const errorInfo: { password?: [string] } = {};
     const errorCode = error.code ?? "unknown";
@@ -177,20 +175,21 @@ export async function updatePasswordAction(
 export async function updateProfileAction(
   data: ProfileFormType,
 ): Promise<ProfileUpteActionReturnType> {
-  // zod validate
+  // ZODでのバリデーション
   const result = ProfileFormSchema.safeParse(data);
   if (!result.success) {
-    // validate error
+    // バリデーションエラー
     return {
       success: result.success,
       error: result.error.flatten().fieldErrors,
     };
   }
 
-  // update
+  // ユーザ名更新
   const { updateUserName } = await getAuthSign();
   const { error } = await updateUserName(data.fullname);
 
+  // ユーザ名更新失敗
   if (error) {
     const errorInfo: { fullname?: [string] } = {};
     const errorCode = error.code ?? "unknown";

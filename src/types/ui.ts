@@ -37,17 +37,20 @@ export type ButtonProps = {
   size?: Size;
 };
 
+// LadingButton
 export type LoadingButtonProps = ButtonProps & {
   isProcessing: boolean;
 };
 
+// IconButton
 export type IconButtonProps = ButtonProps & {
   icon: React.ReactNode;
 };
 
+// CircleIconButton
 export type CircleIconButtonProps = Omit<IconButtonProps, "full">;
 
-// Link
+// ButtonLink
 export type ButtonLinkProps = {
   href: string;
   text: string;
@@ -58,18 +61,19 @@ export type ButtonLinkProps = {
   size?: Size;
 };
 
+// IconBUttonLink
 export type IconButtonLinkProps = ButtonLinkProps & {
   icon: React.ReactNode;
 };
 
-// loading
+// Spinner for Loading
 export type SpinnerProps = {
   className?: string;
   color?: Color;
   size?: Size;
 };
 
-// generate function args type
+// generate Button Style
 export type BtnStyleArgsType = {
   color?: Color;
   size?: Size;
@@ -77,12 +81,15 @@ export type BtnStyleArgsType = {
   className?: string;
 };
 
+// generate Circle Button Style
 export type CircleIconBtnStyleArgsType = {
   color?: Color;
   size?: Size;
   className?: string;
 };
 
+// generate Button Link Style
 export type BtnLinkStyleArgsType = BtnStyleArgsType;
 
+// generate Loading Spinner Style
 export type SpinnerStyleArgsType = CircleIconBtnStyleArgsType;

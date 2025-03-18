@@ -33,6 +33,7 @@ export type TextInputNoLabelProps<T extends FieldValues> = Optional<
   "label"
 >;
 
+// generate Input Text Style
 export type InputStyleArgsType = {
   color?: InputColorStyle;
   size?: Size;
@@ -40,12 +41,14 @@ export type InputStyleArgsType = {
   className?: string;
 };
 
+// generate Label Style
 export type LabelStyleArgsType = {
   color?: InputColorStyle;
   size?: Size;
   className?: string;
 };
 
+// generate Help Style
 export type HelpStyleArgsType = {
   color?: InputColorStyle;
   size?: Size;

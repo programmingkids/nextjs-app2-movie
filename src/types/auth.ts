@@ -79,7 +79,7 @@ export type AuthUserContext = {
   setAuthUser: React.Dispatch<React.SetStateAction<AuthUser>>;
 };
 
-// スキーマ定義から型を推論
+// スキーマ定義から型を定義
 export type SigninFormType = z.infer<typeof SigninFormSchema>;
 export type SignupFormType = z.infer<typeof SignupFormSchema>;
 export type UpdatePasswordFormType = z.infer<typeof UpdatePasswordFormSchema>;
