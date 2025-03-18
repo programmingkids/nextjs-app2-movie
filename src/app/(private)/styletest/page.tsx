@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   Button,
   LoadingButton,
@@ -13,14 +12,15 @@ import { FaBasketball } from "react-icons/fa6";
 import { FaBeerMugEmpty } from "react-icons/fa6";
 
 export const metadata: Metadata = {
-  title: "Hogehoge",
+  title: "styletest",
 };
 
 export default function Page() {
   return (
     <div>
-      <h1 className="p-4 text-center text-lg bg-blue-500 text-white">Hoge</h1>
-      <div className="m-5 text-wrap">{"hoge, ".repeat(100)}</div>
+      <h1 className="p-4 text-center text-lg bg-blue-500 text-white">
+        StyleTest
+      </h1>
       <div className="my-4 w-full">
         <Button type="button" label="hoge" />
         <Button type="button" label="hoge" size="small" />
@@ -288,10 +288,6 @@ export default function Page() {
         <LoadingSpinner size="large" color="cyan" />
         <LoadingSpinner size="large" color="indigo" />
         <LoadingSpinner size="large" color="emerald" />
-      </div>
-
-      <div>
-        <Link href="/signout">Signout</Link>
       </div>
     </div>
   );
