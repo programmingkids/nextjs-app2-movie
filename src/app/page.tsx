@@ -15,8 +15,18 @@ export default function Home() {
       <div className="mt-16 mb-16">
         <h1 className="p-5 text-center text-2xl font-semibold">動画アプリ</h1>
         <ul className="flex justify-center gap-10 mt-10">
-          <ButtonLink text="Signin" href="/signin" color="blue" size="large" />
-          <ButtonLink text="Signup" href="/signup" color="blue" size="large" />
+          <ButtonLink
+            text="サインイン"
+            href="/signin"
+            color="blue"
+            size="large"
+          />
+          <ButtonLink
+            text="サインアップ"
+            href="/signup"
+            color="blue"
+            size="large"
+          />
         </ul>
       </div>
       <Footer />

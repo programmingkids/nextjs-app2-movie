@@ -3,7 +3,7 @@ import { MdSearch } from "react-icons/md";
 import { type SearchPageProps } from "@/types/page";
 import { getMovieByKeyword } from "@/lib/youtube";
 import { MovieList } from "@/components/youtube/movieList";
-import { items, totalResults } from "@/config/dammyItems";
+//import { items, totalResults } from "@/config/dammyItems";
 
 export const metadata: Metadata = {
   title: "検索",
@@ -16,7 +16,7 @@ export default async function Page({ params }: SearchPageProps) {
   const keyword = decodeURIComponent(q);
 
   // APIで検索
-  //const { items, totalResults } = await getMovieByKeyword(keyword);
+  const { items, totalResults } = await getMovieByKeyword(keyword);
   //console.dir(items, {depth:null});
 
   return (

@@ -131,7 +131,7 @@ export function PlaylisetSelectBox({
   title: string;
   onClose: () => void;
 }) {
-  const [playlist, setPlaylist] = useState<Playlist[]>([]);
+  const [playlist, setPlaylist] = useState<Playlist[]>();
 
   // Formの入力パーツの初期化
   const { register, handleSubmit, formState, setError, clearErrors } =
@@ -144,7 +144,7 @@ export function PlaylisetSelectBox({
   const onSubmit: SubmitHandler<PlaylistAddModalType> = async (
     data: PlaylistAddModalType,
   ) => {
-    const { id } = playlist[data.index];
+    const { id } = playlist![data.index];
     // サーバアクションを起動
     // プレイリストにビデオを追加
     await createVideoAction({
@@ -163,7 +163,7 @@ export function PlaylisetSelectBox({
     })();
   }, []);
 
-  return playlist.length > 0 ? (
+  return playlist && playlist.length > 0 ? (
     <form onSubmit={handleSubmit(onSubmit)}>
       <select
         {...register("index", { valueAsNumber: true })}
@@ -188,6 +188,8 @@ export function PlaylisetSelectBox({
         />
       </div>
     </form>
+  ) : playlist && playlist.length === 0 ? (
+    <div>プレイリストがありません</div>
   ) : (
     <LoadingSpinner color="orange" />
   );
