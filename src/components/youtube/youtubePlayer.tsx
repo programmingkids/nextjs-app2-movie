@@ -109,7 +109,7 @@ export function YoutubePlayer({
           </button>
           <button
             type="button"
-            className="px-4 py-1 text-blue-700 text-xs font-medium text-center border-y border-blue-400 bg-white hover:bg-blue-400 hover:bg-blue-800 hover:text-white focus:outline-none focus:bg-blue-800 focus:text-white"
+            className="px-4 py-1 text-blue-700 text-xs font-medium text-center border-y border-blue-400 bg-white hover:bg-blue-400 hover:text-white focus:outline-none focus:bg-blue-800 focus:text-white"
             onClick={() => handleClickSeekTo(-10)}
           >
             <FaAngleLeft className="inline mr-1" />
@@ -124,7 +124,7 @@ export function YoutubePlayer({
           </button>
           <button
             type="button"
-            className="px-4 py-1 text-blue-700 text-xs font-medium text-center border-y border-blue-400 bg-white hover:bg-blue-400 hover:text-whie focus:outline-none focus:bg-blue-800 focus:text-white"
+            className="px-4 py-1 text-blue-700 text-xs font-medium text-center border-y border-blue-400 bg-white hover:bg-blue-400 hover:text-white focus:outline-none focus:bg-blue-800 focus:text-white"
             onClick={() => handleClickSeekTo(10)}
           >
             <span className="align-middle">10s</span>
