@@ -7,10 +7,8 @@ import { CircleIconButton } from "@/components/ui/button";
 import { AddModal } from "@/components/playlist/addModal";
 
 export function Add({ videoId, title }: AddProps) {
-  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    setOpen(true);
   };
 
   return (
@@ -22,17 +20,6 @@ export function Add({ videoId, title }: AddProps) {
         icon={<FaRegBookmark />}
         onClick={handleClick}
       />
-      {open && (
-        <AddModal
-          videoId={videoId}
-          title={title}
-          open={open}
-          onClose={() => setOpen(false)}
-          mainText="プレイリスト"
-          cancelText="キャンセル"
-          successText="追加"
-        />
-      )}
     </>
   );
 }

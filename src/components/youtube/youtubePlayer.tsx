@@ -28,67 +28,43 @@ export function YoutubePlayer({
   }, []);
 
   function handleClickPlay() {
-    setPlaying((p) => !p);
+    
   }
 
   function handleClickSeekTo(sec: number) {
-    const player = playerRef.current;
-    if (player) {
-      const currentSec = player.getCurrentTime() ?? 0;
-      player.seekTo(currentSec + sec);
-    }
+    
   }
 
   function handledClickPrev() {
-    playPrev();
+    
   }
 
   function handledClickNext() {
-    playNext();
+    
   }
 
   function playerStart() {
-    setPlaying(true);
+    
   }
 
   function playerPlay() {
-    setPlayLabel(<FaPause />);
+    
   }
 
   function playerPause() {
-    setPlayLabel(<FaPlay />);
+    
   }
 
   function playPrev() {
-    const newIndex =
-      currentPlay - 1 < 0
-        ? videoList.length - 1
-        : (currentPlay - 1) % videoList.length;
-    setCurrentPlay(newIndex);
+    
   }
 
   function playNext() {
-    const newIndex = (currentPlay + 1) % videoList.length;
-    setCurrentPlay(newIndex);
+    
   }
 
   return (
     <div className="aspect-video">
-      {hasWindow && (
-        <ReactPlayer
-          ref={playerRef}
-          url={`https://www.youtube.com/watch?v=${videoList[currentPlay].videoId}`}
-          playing={playing}
-          controls={true}
-          width="100%"
-          height="100%"
-          className="react-player"
-          onStart={playerStart}
-          onPlay={playerPlay}
-          onPause={playerPause}
-          onEnded={playNext}
-        />
-      )}
       <div className="mt-6 mb-4">
         <div className="flex justify-center gap-0">
           <button
@@ -134,10 +110,8 @@ export function YoutubePlayer({
       </div>
       <div className="flex justify-between mb-5">
         <div className="text-4xl lg:text-2xl font-bold">
-          {videoList[currentPlay].title}
         </div>
         <div>
-          <Add {...videoList[currentPlay]} />
         </div>
       </div>
     </div>

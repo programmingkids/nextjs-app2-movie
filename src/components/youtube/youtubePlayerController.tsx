@@ -14,20 +14,8 @@ export function YoutubePlayerController({
     <div className="p-5 w-full">
       <div className="flex flex-wrap mx-auto justify-around">
         <div className="w-full lg:w-[calc(100%-450px)]">
-          <YoutubePlayer {...{ currentPlay, setCurrentPlay, videoList }} />
         </div>
         <div className="w-full lg:max-w-[400px] pt-8 ml-0 lg:pt-0 lg:ml-10">
-          {videoList.map((v, index) => (
-            <YoutubePlayerRelatedVideo
-              key={index}
-              {...{
-                ...v,
-                current: currentPlay === index,
-                index,
-                setCurrentPlay,
-              }}
-            />
-          ))}
         </div>
       </div>
     </div>

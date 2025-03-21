@@ -16,8 +16,6 @@ export default async function Page({ params }: SearchPageProps) {
   const keyword = decodeURIComponent(q);
 
   // APIで検索
-  const { items, totalResults } = await getMovieByKeyword(keyword);
-  //console.dir(items, {depth:null});
 
   return (
     <div className="text-center">
@@ -25,13 +23,6 @@ export default async function Page({ params }: SearchPageProps) {
         <MdSearch className="inline align-bottom mr-2 text-2xl" />
         Search: {keyword}
       </h1>
-      {keyword == "" ? (
-        <div className="m-4">検索語を入力してください</div>
-      ) : totalResults <= 0 ? (
-        <div className="m-4">検索結果が見つかりません</div>
-      ) : (
-        <MovieList {...{ items }} />
-      )}
     </div>
   );
 }

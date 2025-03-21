@@ -26,29 +26,6 @@ export async function getMovieByKeyword(
   // APIに対する通信処理
   const url = `${APIURL}/search?key=${APIKEY}&type=video&part=snippet&q=${keyword}&maxResults=${limit}&pageToken=${pageToken}`;
   //console.log(url);
-
-  const data = await fetch(url);
-  const {
-    items,
-    nextPageToken,
-    prevPageToken,
-    pageInfo: { totalResults, resultsPerPage },
-  } = await data.json();
-
-  // // 検索結果が空の場合、エラー
-  if (totalResults <= 0 || !items) {
-    return errorData;
-  }
-  // console.dir(items, { depth: null });
-
-  return {
-    items: items.filter(
-      (item: YoutubeVideoItem) => item.id.kind !== "youtube#channel",
-    ),
-    nextPageToken,
-    resultsPerPage,
-    totalResults,
-  };
 }
 
 // YoutubeAPIから1件を取得
